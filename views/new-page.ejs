@@ -1,0 +1,9 @@
+<p>new</p>
+
+    <% entry.forEach((post)=>{ %>
+    
+    <%=post.body%>
+    <%=post.time%>
+<%=   moment(Date.parse(post.date)).format('DD-MM-YYYY')  %>
+
+<% }) %>
