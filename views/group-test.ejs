@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+
+
+        <form action="create">
+            <input class="button" type="submit" value="Create Entry" />
+        </form>
+
+        <main class="page-container">
+
+            <% var lastDate %>
+            <% var passCount = 1%>
+
+            <% entries.forEach((post)=>{ %>
+
+
+            <!--        TO ADD GRADIENT BAKGROUND FOR EACH DAY -->
+            <% if(post._id.dateFormated == lastDate) { %>
+
+            <% } else { %>
+
+            <% post._id.dateFormated %>
+
+            <script>
+                document.write('</div>');
+                document.write('<div class="page-container__day-container">'); 
+            </script>
+
+            <% } %>
+
+            <div class="log__header">
+
+                <div class="log__header--left">
+                    <div class="log__header__title"><%= post._id.logname %></div>
+                    <div class="log__header__date"><%= post._id.dateFormated %></div>
+                </div>
+
+                <div class="log__header--right">
+                    <div class="log__header__time">
+
+                        <% function time_convert(num)
+                        { 
+                            var hours = Math.floor(num / 60);  
+                            var minutes = num % 60;
+                            return hours + ":" + minutes;         
+                        }
+                        
+                        %>
+                        
+                         
+                        
+                        
+                        <%=  time_convert(moment.duration(post.sumHour, "h").asMinutes() + post.sumMinute) %> </div>
+                </div>
+            </div>
+
+
+            <div class="log__entry_container">
+
+                <% post.entries.reverse().forEach((entries)=>{ %>
+
+                <div class="log__entry">
+                    <div class="log__entry__body">
+
+                        <div class="body--left">
+                            <div class="body__time">
+
+
+
+
+                                <%= entries.timeHour %>h 
+                                <%= entries.timeMinute %>m
+                            </div>
+                        </div>
+
+                        <div class="body--right">
+                            <p class="body__text"><%= entries.body %></p>
+                        </div>
+                    </div>
+                </div>  
+
+
+                <% }) %>
+            </div>
+
+            <% lastDate = post._id.dateFormated %>
+
+            <% }) %>
+
+
+
+        </main>
+
+        <script>
+
+        </script>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+

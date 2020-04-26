@@ -1,0 +1,280 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+:root {
+
+    /*    colours */
+    /*    black to gray */
+    --black-10: #020202;
+    --black-8: #0c0c0c;
+    --black-6: #1f1f1f;
+    --black-4: #333333;
+    --black-2: #505050;
+
+
+
+    /*    Header text colours */
+    --daycontainer-header-title: var(--black-10);
+    --daycontainer-header-date: var(--black-2);
+    --daycontainer-header-time: var(--black-10);
+
+    --daycontainer-entry-body: var(--black-6);
+    --daycontainer-entry-time: var(--black-6);
+}
+
+
+body {
+    background-color: aliceblue;
+}
+
+/* Mobile First */
+
+/* Home page - display entrys*/
+.page-container {
+    max-width:400px;
+    background-color: white;
+    margin: auto;
+}
+
+.page-container__day-container {
+    background: rgb(255,183,183);
+    background: linear-gradient(180deg, rgba(255,183,183,1) 0%, rgba(255,255,255,1) 100%);
+    padding: 10px 10px 5px 10px;
+}
+
+.day-container__log {
+    margin: 0px 0px 10px 0px;
+    border: 0px solid gray;  
+    background-color: ;
+}
+
+.log__header {
+    height: 70px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+        border: 1px solid gray; 
+    background-color: beige;
+
+}
+
+.log__header__title {
+    font-weight: 600;
+    color: var(--daycontainer-header-title);
+}
+
+.log__header__time {
+    font-weight: 600;
+}
+
+.log__header__date {
+    padding-top: 5px;
+    font-size: 14px;
+    color: var(--daycontainer-header-date);
+}
+
+.log__entry {
+    margin-top: 0px;
+    padding-bottom: 20px;
+}
+
+.log__entry:last-child {
+    margin-top: 0px;
+    padding-bottom: 0px;
+}
+
+.log__entry__body {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+    /*    background-color: antiquewhite;*/
+
+}
+
+.body--left {
+    min-width: 70px;
+    height: 30px;
+    border-radius: 0px 10px 10px 0px;
+    background-color: gainsboro;
+    justify-content: center;
+    display: flex;
+}
+
+.body__time {
+    color: var(--daycontainer-entry-time);
+    padding-top: 3px;
+}
+
+.body__text {
+    color: var(--daycontainer-entry-body);
+}
+
+
+/* Create entry page */
+
+.log-selection__log-container {
+    background-color: aquamarine;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.log-container__log-box {
+    width: 50px;
+    height: 50px;
+    background-color: crimson;
+}
+
+.create-entry__log-selection {
+    display: flex;
+    padding: 10px;
+    background-color: antiquewhite;
+}
+
+.create-entry__time-selection {
+    margin-bottom: 10px;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.create-entry__submit {
+    margin: 5px 0px;
+}
+
+/* Create log page */
+
+.create-log__submit {
+    margin: 5px 0px;
+}
+
+
+/* timepicker */
+.timepicker-container {
+    width: 400px;
+    background-color: white;  
+    border-radius: 5px;
+}
+
+.timepicker-container__container {
+    display: flex;
+    margin-bottom: 10px;
+
+}
+
+.container__item {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: gainsboro;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__item-selected {
+    background-color: gray;
+}
+
+.timepicker-container__finalTimes {
+    display: flex;    
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.timepicker-container__finalTimes .input  {
+    margin: 0px 5px;
+
+}
+
+
+
+
+
+
+
+.timepicker-container__buttons {
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.timepicker-container__button {
+    min-width: 49.6%;
+    height: 100%;
+    display: inline-block;
+    border: 0px;
+}
+
+.paddding-10 {
+    padding: 10px;
+}
+
+#timeMinute {
+    
+}
+
+
+
+.input input {
+    width: 60px;
+    border: 1px solid #9A9A9A;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+}
+
+.timepicker-container__title {
+    margin-bottom: 5px;
+}
+
+.input-title {
+    
+}
+
+.body--right { 
+    padding: 0px 10px;
+}
+
+.log__entry_container {
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.head {
+    background-color: beige;
+}
+
+.post {
+        background-color: gainsboro;
+
+}
+
+.test {
+    background: linear-gradient(180deg, rgba(255,183,183,1) 0%, rgba(255,255,255,1) 100%);
+    width: 500px;
+}
+
+.button {
+    padding: 10px;
+    border: none;
+    background-color: deepskyblue;
+    color: white;
+}

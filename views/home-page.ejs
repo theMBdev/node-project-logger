@@ -1,14 +1,34 @@
-<h1>Test</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
 
-<% if (entry) { %>
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
 
-<td><%= entry.body %></td>
-<td><%= entry.time %></td>
+    </head>
+    <body>
 
-<% } else { %>
+        <h1>Test</h1>
 
-<p>doesnt exist</p>
-
-<% } %>
+        <% if (entry) { %>
 
 
+        <div class="entrytemp">
+            <td><%= entry.body %></td>
+            <br>
+            <td><%= entry.time %></td>
+
+        </div>
+
+
+        <% } else { %>
+
+        <p>doesnt exist</p>
+
+        <% } %>
+
+    </body>
+</html>
