@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const entry = require('./routes/entry.route');
 const log = require('./routes/log.route'); 
+const test = require('./routes/test.route'); 
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/entry', entry);
 app.use('/log', log);
+app.use('/test', test);
 
 let port = 3000;
 
