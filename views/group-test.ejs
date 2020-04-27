@@ -11,7 +11,17 @@
     </head>
     <body>
 
+        <% if ( expressFlashCreate.length > 0 ) { %>
+        <div id="popup"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
+        <% } %>
 
+        <% if ( expressFlashUpdated.length > 0 ) { %>
+        <div id="popup"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
+        <% } %>
+
+        <% if ( expressFlashDelete.length > 0 ) { %>
+        <div id="popup"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
+        <% } %>
 
         <form action="create">
             <button class="button" type="submit" >Create Entry</button>
@@ -97,9 +107,21 @@
 
         </main>
 
+<!--        Fades out and removed the entry created/updated/deleted flash message -->
         <script>
+            var popup = document.getElementById("popup");
 
+            if(popup) {
+                setTimeout(function() {
+                    popup.classList.toggle('fade');
+                }, 1000);
+
+                setTimeout(function() {
+                    popup.classList.toggle('remove');
+                }, 2000);
+            }
         </script>
+
 
     </body>
 </html>

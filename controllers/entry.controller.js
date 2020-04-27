@@ -75,7 +75,7 @@ exports.entry_find = function(req, res) {
                 res.send(err);
             } else {
                 //                                res.json(result);
-                res.render('group-test', {entries: result, moment: moment});   
+                res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
             }
         }
     );
@@ -136,7 +136,7 @@ exports.entry_create = function (req, res, next) {
             log.save();
         });
 
-
+        req.flash('create', 'Entry Created');
         res.redirect('find');
     })
 
@@ -168,6 +168,8 @@ exports.entry_update = function (req, res) {
     Entry.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, entry) {
         if (err) return next(err);
         console.log(req.body);
+        
+        req.flash('update', 'Entry Updated');
         res.redirect('/entry/find');
     });
 };
@@ -187,9 +189,12 @@ exports.entry_delete = function (req, res) {
             Entry.findByIdAndRemove(req.params.id, function (err) {
                 if (err) return next(err);  
 
+                req.flash('delete', 'Entry Deleted')
                 res.redirect('/entry/find');
             })
 
         });
     }
 )}
+
+

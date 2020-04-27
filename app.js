@@ -5,8 +5,21 @@ const entry = require('./routes/entry.route');
 const log = require('./routes/log.route'); 
 const test = require('./routes/test.route'); 
 
+var session = require('express-session');
+var flash = require('express-flash');
 
 const app = express();
+
+var sessionStore = new session.MemoryStore;
+
+app.use(session({
+    cookie: { maxAge: 10000 },
+    store: sessionStore,
+    saveUninitialized: false,
+    resave: 'false',
+    secret: 'secret'
+}));
+app.use(flash());
 
 var moment = require('moment');
 moment().format();
