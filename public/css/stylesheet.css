@@ -9,21 +9,30 @@
 
     /*    colours */
     /*    black to gray */
-    --black-10: #020202;
-    --black-8: #0c0c0c;
-    --black-6: #1f1f1f;
-    --black-4: #333333;
-    --black-2: #505050;
+    --black-10: hsl(0, 0%, 0%);
+    --black-8: hsl(0, 0%, 10%);
+    --black-6: hsl(0, 0%, 20%);
+    --black-4: hsl(0, 0%, 30%);
+    --black-2: hsl(0, 0%, 40%);
+
+
+    --grey-4: hsl(0, 0%, 92%);
+
+    --green-4: #dbf1c6;
 
 
 
     /*    Header text colours */
-    --daycontainer-header-title: var(--black-10);
+    --daycontainer-date: var(--black-4);
+
+    --daycontainer-header-title: var(--black-8);
     --daycontainer-header-date: var(--black-2);
-    --daycontainer-header-time: var(--black-10);
+    --daycontainer-header-time: var(--black-4);
+    --daycontainer-header-background: var(--green-4);
 
     --daycontainer-entry-body: var(--black-6);
-    --daycontainer-entry-time: var(--black-6);
+    --daycontainer-entry-time: var(--black-2);
+    --daycontainer-entry-time-background: var(--grey-4);
 }
 
 
@@ -41,8 +50,8 @@ body {
 }
 
 .page-container__day-container {
-    background: rgb(255,183,183);
-    background: linear-gradient(180deg, rgba(255,183,183,1) 0%, rgba(255,255,255,1) 100%);
+    background: rgb(221,221,221);
+    background: linear-gradient(0deg, rgba(221,221,221,1) 0%, rgba(255,255,255,1) 100%);
     padding: 10px 10px 5px 10px;
 }
 
@@ -59,8 +68,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-        border: 1px solid gray; 
-    background-color: beige;
+    border: 1px solid gray; 
+    background-color: var(--daycontainer-header-background);
 
 }
 
@@ -71,6 +80,7 @@ body {
 
 .log__header__time {
     font-weight: 600;
+    color: var(--daycontainer-header-time);
 }
 
 .log__header__date {
@@ -101,14 +111,14 @@ body {
     min-width: 70px;
     height: 30px;
     border-radius: 0px 10px 10px 0px;
-    background-color: gainsboro;
+    background-color: var(--daycontainer-entry-time-background);
     justify-content: center;
     display: flex;
 }
 
 .body__time {
     color: var(--daycontainer-entry-time);
-    padding-top: 3px;
+    padding-top: 3.5px;
 }
 
 .body__text {
@@ -164,9 +174,8 @@ body {
 
 /* timepicker */
 .timepicker-container {
-    width: 400px;
     background-color: white;  
-    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .timepicker-container__container {
@@ -196,7 +205,7 @@ body {
     margin-top: 20px;
 }
 
-.timepicker-container__finalTimes .input  {
+.finalTimes__input-container  {
     margin: 0px 5px;
 
 }
@@ -225,25 +234,19 @@ body {
 }
 
 #timeMinute {
-    
+
 }
 
 
 
-.input input {
-    width: 60px;
-    border: 1px solid #9A9A9A;
-    border-radius: 5px;
-    height: 30px;
-    text-align: center;
-}
+
 
 .timepicker-container__title {
     margin-bottom: 5px;
 }
 
 .input-title {
-    
+    margin-bottom: 5px;
 }
 
 .body--right { 
@@ -263,7 +266,7 @@ body {
 }
 
 .post {
-        background-color: gainsboro;
+    background-color: gainsboro;
 
 }
 
@@ -277,4 +280,90 @@ body {
     border: none;
     background-color: deepskyblue;
     color: white;
+}
+
+.page-container__day-container__date {
+    margin-bottom: 10px;
+    color: var(--daycontainer-date);
+}
+
+.input-container {
+    margin-bottom: 5px;
+}
+
+.input-small {
+    width: 60px;
+}
+
+.input {   
+    border: 1px solid #9A9A9A;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: black;
+}
+
+/* selected link */
+a:active {
+    color: black;
+}
+
+.entry-update-link {
+    background-color: wheat;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 100px;
+
+}
+
+input[type='text'],
+input[type='number'],
+textarea {
+    font-size: 16px;
+}
+
+.create-entry__add-note__textarea {
+    width: 100%;    
+}
+
+.log-create-link {
+     background-color: wheat;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 5px; 
 }

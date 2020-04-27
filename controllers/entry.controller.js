@@ -99,7 +99,17 @@ exports.display = function (req, res) {
 
 
 exports.entry_create_view = function (req, res) {
-    res.render('create-entry');
+
+
+    Log.find({}, (err, logs) => {
+
+        //        console.log("cops " ,entries.entries[1]);
+        console.log(logs);
+
+        res.render('create-entry', {logs: logs, moment: moment});   
+
+    })
+
 };
 
 
@@ -138,9 +148,18 @@ exports.entry_details = function (req, res, next) {
     Entry.findById(req.params.id, function (err, entry) {
         if (err) return next(err);
 
-
         console.log(entry);
         res.render('home-page', {entry: entry});
+    })
+};
+
+
+// start view for update
+exports.entry_update_view = function (req, res) {
+    Entry.findById(req.params.id, function (err, entry) {
+        if (err) return next(err);
+
+        res.render('update-entry', {entry: entry});
     })
 };
 
@@ -148,14 +167,29 @@ exports.entry_details = function (req, res, next) {
 exports.entry_update = function (req, res) {
     Entry.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, entry) {
         if (err) return next(err);
-        res.send('Entry udpated.');
+        console.log(req.body);
+        res.redirect('/entry/find');
     });
 };
 
 
 exports.entry_delete = function (req, res) {
-    Entry.findByIdAndRemove(req.params.id, function (err) {
+    Entry.findById(req.params.id, function (err, entry) {
         if (err) return next(err);
-        res.send('Deleted successfully!');
-    })
-};
+
+        Log.findOneAndUpdate({name: entry.logname}, {new: true}, function (err, entry) {
+            if (err) return next(err);
+
+            // remove from log ref array
+            entry.entries.pull(req.params.id);
+            entry.save();
+
+            Entry.findByIdAndRemove(req.params.id, function (err) {
+                if (err) return next(err);  
+
+                res.redirect('/entry/find');
+            })
+
+        });
+    }
+)}

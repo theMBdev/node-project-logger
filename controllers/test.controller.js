@@ -54,7 +54,7 @@ exports.test_create = function (req, res, next) {
     
     
     
-//    // ADD NEW POST WITHING LOG
+//    // ADD NEW POST WITHING LOG / would be find by date
 //    Test.findOneAndUpdate({ _id: "5ea4f1e37b643b602c790b2b", "logArray._id": "5ea4f1e37b643b602c790b2c" }, { $push: { "logArray.$.posts": test.logArray[0].posts  } }, function (err, doc) {
 //        if (err) {
 //            console.log(err);

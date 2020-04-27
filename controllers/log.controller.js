@@ -9,6 +9,12 @@ exports.test = function (req, res) {
 };
 
 
+exports.log_create_view = function (req, res) {
+
+    res.render('create-log');   
+
+};
+
 exports.log_create = function (req, res, next) {
     let log = new Log(
         {
@@ -20,6 +26,6 @@ exports.log_create = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.send('Entry Created successfully')
+        res.redirect('../entry/create');
     })
 };

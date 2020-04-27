@@ -16,8 +16,11 @@ router.post('/create', entry_controller.entry_create);
 router.get("/find", entry_controller.entry_find);
 
 router.get('/:id', entry_controller.entry_details);
-router.put('/:id/update', entry_controller.entry_update);
-router.delete('/:id/delete', entry_controller.entry_delete);
+
+router.post('/:id/updatep', entry_controller.entry_update);
+router.get('/:id/update', entry_controller.entry_update_view);
+
+router.post('/:id/delete', entry_controller.entry_delete);
 
 //router.get('/display', entry_controller.entry_display);
 

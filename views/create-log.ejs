@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <form action="../entry/create">
+            <button class="button" type="submit">Back</button>
+        </form>
+
+        <main class="page-container">
+
+            <div class="page-container__create-entry">
+
+                <form action="/log/create" method="POST">
+
+                    <div class="flex-column-center"> 
+
+                        <div class="input-container">
+
+                            <div class="input-title">Log name</div>
+                            <input class="input" name="name" id="log" type="text">
+                        </div>
+
+                        <div class="create-entry__submit">                        
+                            <input type="submit" value="Submit">
+                        </div>                        
+                    </div>
+
+                </form> 
+
+            </div>
+        </main>
+
+    </body>
+</html>

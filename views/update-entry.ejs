@@ -1,3 +1,6 @@
+
+<%= entry.id %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +14,10 @@
     </head>
     <body>
 
-        <form action="find">
+        <h1>Update</h1>
+
+
+        <form action="../find">
             <button class="button" type="submit" >Back to Home</button>
         </form>
 
@@ -21,34 +27,9 @@
 
             <div class="page-container__create-entry">
 
-                <form action="/entry/create" method="POST" id="entrycreateform">
+                <form action="/entry/<%= entry.id %>/updatep" method="POST">
 
-                    <div class="create-entry__log-selection">
-
-                        <% logs.forEach((log) => { %>
-
-
-                        <div id="log-container" class="log-selection__log-container">
-
-                            <div id="log1" class="log-container__log-text"><%= log.name %></div>
-                        </div>
-
-
-                        <% }) %>
-
-                        <!--
-<div id="log-container" class="log-selection__log-container">                            
-
-<div id="log2" class="log-container__log-text">Life Log</div>
-</div>
--->
-                    </div>
-
-                    <a href="../log/create" class="log-create-link">Create New Log</a>
-
-
-                    <input name="logname" id="log" type="hidden">
-
+                    <input name="logname" id="log" type="hidden" value="<%= entry.logname %>">
 
                     <div class="flex-column-center">
 
@@ -56,9 +37,11 @@
 
                             <div class="timepicker-container">
 
-
                                 <div class="timepicker-container__title">Hours</div>
                                 <div class="timepicker-container__container">
+
+
+
                                     <div id="hour0" class="container__item">0</div>
                                     <div id="hour1" class="container__item">1</div>
                                     <div id="hour2" class="container__item">2</div>
@@ -75,16 +58,15 @@
                                     <div id="min45" class="container__item">45</div>
                                 </div>
 
-
                                 <div class="timepicker-container__finalTimes">
                                     <div class="finalTimes__input-container">
                                         <div class="input-title">Hours</div>
-                                        <input class="input input-small" id="timeHour" name="timeHour" type="text">                     
+                                        <input class="input input-small" id="timeHour" name="timeHour" type="text" value="<%= entry.timeHour %>">                    
                                     </div>
 
                                     <div class="finalTimes__input-container">
                                         <div class="input-title">Minutes</div>
-                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text">
+                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text" value="<%= entry.timeMinute %>">
                                     </div>
                                 </div>
 
@@ -100,65 +82,26 @@
                                       rows="4" 
                                       cols="50" 
                                       class="create-entry__add-note__textarea"
-                                      ></textarea>                            
+                                      ><%= entry.body %></textarea>                            
 
                         </div>
 
                         <div class="create-entry__submit">                        
-                            <button type="submit" form="entrycreateform">Submit</button>
+                            <button type="submit">Submit</button>
                         </div>                        
                     </div>
-
-
                 </form> 
+
+                <form action="/entry/<%= entry.id %>/delete" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
 
             </div>
         </main>
 
         <script>
-            // Script for log picker
-
-            var log1 = document.getElementById('log1');
-            var log2 = document.getElementById('log2');  
-
-            var log = document.getElementById('log');
-
-            var logs = document.querySelectorAll('[id^=log-container]');
-            for(var i in logs){
-                logs.item(i).addEventListener("click", addLog);
-            }
-
-            function addLog(event) {
-                //remove class from all elements
-                for(var i in logs){
-                    logs.item(i).classList.remove("container__item-selected");
-                }
-
-                // add class to clicked element
-                event.target.classList.add("container__item-selected");
-
-                // add time selected to input box                
-                log.value = event.target.querySelector('.log-container__log-text').innerHTML;
-            }
-
-        </script>
-
-        <script>
 
             // Script for time picker
-
-            //            var hour0 = document.getElementById('hour0');
-            //            var hour1 = document.getElementById('hour1');
-            //            var hour2 = document.getElementById('hour2');
-            //            var hour3 = document.getElementById('hour3');
-            //            var hour4 = document.getElementById('hour4');
-            //            var hour5 = document.getElementById('hour5');
-            //            var hour6 = document.getElementById('hour6');
-            //
-            //            var min0 = document.getElementById("min0");
-            //            var min15 = document.getElementById("min15");
-            //            var min30 = document.getElementById("min30");
-            //            var min45 = document.getElementById("min45");
 
             var timeHour = document.getElementById('timeHour');
             var timeMinute = document.getElementById('timeMinute');
@@ -199,6 +142,23 @@
                 // add time selected to input box
                 timeMinute.value = event.target.innerHTML;
             }
+
+            // highlight the pre selected times
+            function addClassToTimeElements() {
+                //remove class from all elements
+                for(var i in minutesBox){
+                    if (timeMinute.value == minutesBox.item(i).innerHTML) {
+                        minutesBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+
+                for(var i in hoursBox){
+                    if (timeHour.value == hoursBox.item(i).innerHTML) {
+                        hoursBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+            }
+            addClassToTimeElements();
 
         </script>    
 

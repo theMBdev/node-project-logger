@@ -14,7 +14,7 @@
 
 
         <form action="create">
-            <input class="button" type="submit" value="Create Entry" />
+            <button class="button" type="submit" >Create Entry</button>
         </form>
 
         <main class="page-container">
@@ -34,9 +34,10 @@
 
             <script>
                 document.write('</div>');
-                document.write('<div class="page-container__day-container">'); 
-            </script>
+                document.write('<div class="page-container__day-container">');
 
+            </script>
+            <h3 class="page-container__day-container__date"><%= post._id.dateFormated %></h3>
             <% } %>
 
             <div class="log__header">
@@ -54,13 +55,9 @@
                             var hours = Math.floor(num / 60);  
                             var minutes = num % 60;
                             return hours + ":" + minutes;         
-                        }
-                        
-                        %>
-                        
-                         
-                        
-                        
+                        }                        
+                        %>                        
+
                         <%=  time_convert(moment.duration(post.sumHour, "h").asMinutes() + post.sumMinute) %> </div>
                 </div>
             </div>
@@ -76,9 +73,6 @@
                         <div class="body--left">
                             <div class="body__time">
 
-
-
-
                                 <%= entries.timeHour %>h 
                                 <%= entries.timeMinute %>m
                             </div>
@@ -86,6 +80,7 @@
 
                         <div class="body--right">
                             <p class="body__text"><%= entries.body %></p>
+                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link">Edit</a>
                         </div>
                     </div>
                 </div>  
