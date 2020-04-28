@@ -20,8 +20,19 @@
     --grey-4: hsl(0, 0%, 92%);
 
     --green-4: hsl(91, 61%, 86%);
-
-
+    
+    
+    --dark-blue: #272343;
+    --light-turq: #E3F6F5;
+    --dark-turq: #BAE8E8;   
+    --lightest-turq: #F4F6F6;
+    
+/*    Button and time entry */
+    --button-primary: var(--dark-blue);
+    --create-new-log-button: var(--light-turq);
+    --time-selector-background-selected: var(--dark-turq);
+    --select-log-backround: var(--lightest-turq);
+    --time-selector-background: var(--lightest-turq);
 
     /*    Header text colours */
     --daycontainer-date: var(--black-4);
@@ -148,7 +159,7 @@ body {
 }
 
 #popup.remove {
-    display: none;
+    display: none; 
 }
 
 
@@ -156,12 +167,13 @@ body {
 /* Create entry page */
 
 .log-selection__log-container {
-    width: 24%;
-    height: 100px;
-    background-color: white;
+    width: 23.5%;
+    height: 110px;
+/*    background-color: white;*/
     text-align: center;
     margin-right: 5px;    
     margin-bottom: 5px;
+    border-radius: 5px;
     padding: 5px;
 
 }
@@ -181,7 +193,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    background-color: antiquewhite;
+    background-color: var(--select-log-backround);
 }
 
 .create-entry__time-selection {
@@ -208,12 +220,13 @@ body {
 
 
 .log-container__icon {
-    background-color: gainsboro;
+    background-color: white;
     width: 55px;
     height: 55px;
-    border-radius: 50%;
+    border-radius: 5px;
     margin: auto;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 
@@ -247,15 +260,16 @@ body {
     width: 50px;
     height: 30px;
     border-radius: 5px;
-    background-color: gainsboro;
+    background-color: var(--time-selector-background);
     margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
 }
 
 .container__item-selected {
-    background-color: gray;
+    background-color: var(--time-selector-background-selected);
 }
 
 .timepicker-container__finalTimes {
@@ -266,7 +280,6 @@ body {
 
 .finalTimes__input-container  {
     margin: 0px 5px;
-
 }
 
 
@@ -355,7 +368,7 @@ body {
 }
 
 .input {   
-    border: 1px solid #9A9A9A;
+    border: 1px solid gainsboro;
     border-radius: 5px;
     height: 30px;
     text-align: center;
@@ -416,15 +429,20 @@ textarea {
 
 .create-entry__add-note__textarea {
     width: 100%;    
+    padding: 10px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .log-create-link {
-    background-color: wheat;
+    background-color: var(--create-new-log-button);
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
-    padding: 5px; 
+    padding: 10px; 
+    margin-bottom: 10px;
 }
 
 
@@ -440,4 +458,16 @@ textarea {
    -webkit-box-orient: vertical;
     font-size: 14px;
     height: 35px;
+}
+
+.button-primary {
+    color: white;
+    background-color: var(--button-primary);
+    border-radius: 5px;
+    border: none;
+    padding: 10px 25px;
+}
+
+.create-entry__add-note {
+    
 }

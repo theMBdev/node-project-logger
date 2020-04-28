@@ -87,7 +87,6 @@
                             </div>
                         </div>
 
-                        <div class="create-entry__add-note">
 
                             <textarea placeholder="Enter note..."
                                       type="text"
@@ -98,10 +97,9 @@
                                       class="create-entry__add-note__textarea"
                                       ></textarea>                            
 
-                        </div>
 
                         <div class="create-entry__submit">                        
-                            <button type="submit" form="entrycreateform">Submit</button>
+                            <button class="button-primary" type="submit" form="entrycreateform">Save</button>
                         </div>                        
                     </div>
 
@@ -124,15 +122,17 @@
 
                 // removed highlight from all logs
                 for(var i in boxs){
-                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
+//                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
+                    boxs.item(i).classList.remove("container__item-selected");
                 }
 
                 // adds highlight and gets log name clicked on log
                 if (event.target.classList[0] == "log-selection__log-container") {
-                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
+//                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
+                    event.target.classList.add("container__item-selected"); 
                     textentry.value = event.target.querySelector('.log-container__log-text').innerHTML;
                 } else {
-                    event.target.parentNode.querySelector('.log-container__icon').classList.add("container__item-selected");
+                    event.target.parentNode.classList.add("container__item-selected");
                     textentry.value = event.target.parentNode.querySelector('.log-container__log-text').innerHTML;
                 }
 
