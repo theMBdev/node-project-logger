@@ -1,4 +1,5 @@
 const Log = require('../models/log.model');
+const User = require('../models/user.model');
 
 var moment = require('moment');
 moment().format();
@@ -18,14 +19,24 @@ exports.log_create_view = function (req, res) {
 exports.log_create = function (req, res, next) {
     let log = new Log(
         {
-            name: req.body.name
+            name: req.body.name,
+            user: req.user.id
         }
     );
 
-    log.save(function (err) {
+    log.save(function (err, log) {
         if (err) {
             return next(err);
         }
+
+        // CODE FOR WHEN A LOG IS CREATED ADD TO USERS LOGS 
+        req.user.logs.push(log);
+        req.user.save();
+
+
+
+
+
         res.redirect('../entry/create');
     })
 };

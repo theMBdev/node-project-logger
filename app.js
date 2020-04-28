@@ -4,22 +4,35 @@ const bodyParser = require('body-parser');
 const entry = require('./routes/entry.route');
 const log = require('./routes/log.route'); 
 const test = require('./routes/test.route'); 
+const user = require('./routes/user.route')
 
 var session = require('express-session');
 var flash = require('express-flash');
+
+
+
+
+//const expressLayouts = require('express-ejs-layouts');
+const passport = require('passport');
+const conflash = require('connect-flash');
+
+require('./config/passport')(passport);
+
+
 
 const app = express();
 
 var sessionStore = new session.MemoryStore;
 
 app.use(session({
-    cookie: { maxAge: 10000 },
+    cookie: { maxAge: 19000000 },
     store: sessionStore,
-    saveUninitialized: false,
-    resave: 'false',
+    saveUninitialized: true,
+    resave: 'true',
     secret: 'secret'
 }));
 app.use(flash());
+app.use(conflash());
 
 var moment = require('moment');
 moment().format();
@@ -47,13 +60,29 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // set the view engine to ejs
+//app.use(expressLayouts);
 app.set('view engine', 'ejs');
+
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/entry', entry);
 app.use('/log', log);
 app.use('/test', test);
+app.use('/user', user);
 
 let port = 3000;
 

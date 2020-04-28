@@ -3,7 +3,8 @@ const Scheme = mongoose.Schema;
 
 const LogSchema = new Scheme({
     name: String,
-    entries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Entry'}]
+    entries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Entry'}],
+    user: mongoose.ObjectId
 });
 
 

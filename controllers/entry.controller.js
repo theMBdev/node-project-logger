@@ -1,5 +1,6 @@
 const Entry = require('../models/entry.model');
 const Log = require('../models/log.model');
+const User = require('../models/user.model');
 
 var moment = require('moment');
 moment().format();
@@ -27,12 +28,20 @@ exports.entry_test = function(req, res) {
 }
 
 
+
+
+// only logged in user home page
 exports.entry_find = function(req, res) {
+
+    //filter here for the logged in user
 
     Entry.aggregate(
         [
             {
+                
+                $match : { user : req.user._id },
 
+            },{
                 $group: {
 
                     _id: { dateFormated: { $dateToString: { format: "%d-%m-%Y", date: "$date" }}, logname: "$logname"}, 
@@ -83,6 +92,65 @@ exports.entry_find = function(req, res) {
 
 
 
+
+
+
+// all entries on home page
+//exports.entry_find = function(req, res) {
+//    
+//    Entry.aggregate(
+//        [
+//            {
+//                $group: {
+//
+//                    _id: { dateFormated: { $dateToString: { format: "%d-%m-%Y", date: "$date" }}, logname: "$logname"}, 
+//
+//                },
+//
+//                $group: {
+//                    _id: { 
+//                        dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
+//                        logname: '$logname',
+//                    },
+//
+//                    sumHour: {
+//                        $sum: '$timeHour'
+//                    },                     
+//                    sumMinute: {
+//                        $sum: '$timeMinute'
+//                    },
+//
+//                    entries: {
+//                        $push: {
+//                            body: '$body',
+//                            logname: '$logname',
+//                            _id: '$_id',
+//                            timeHour: '$timeHour',
+//                            timeMinute: '$timeMinute',
+//                            date: '$date',
+//                            dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
+//                        }
+//                    }
+//                }
+//            },
+//
+//            { $sort: { 'entries.date' : -1 } },
+//
+//        ],
+//
+//        function(err, result) {
+//            if (err) {
+//                res.send(err);
+//            } else {
+//                //                                res.json(result);
+//                res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
+//            }
+//        }
+//    );
+//};
+
+
+
 exports.display = function (req, res) {
 
     // all logs
@@ -101,10 +169,10 @@ exports.display = function (req, res) {
 exports.entry_create_view = function (req, res) {
 
 
-    Log.find({}, (err, logs) => {
+    Log.find({user: req.user._id}, (err, logs) => {
 
         //        console.log("cops " ,entries.entries[1]);
-        console.log(logs);
+        //        console.log(req.user);
 
         res.render('create-entry', {logs: logs, moment: moment});   
 
@@ -121,9 +189,12 @@ exports.entry_create = function (req, res, next) {
             body: req.body.body,
             timeHour: req.body.timeHour,
             timeMinute: req.body.timeMinute,
-            date: new Date()
+            user: req.user.id,
+            date: new Date(),
         }
     );
+
+    //    console.log(req.user);
 
     entry.save(function (err, entry) {
         if (err) {
@@ -136,6 +207,7 @@ exports.entry_create = function (req, res, next) {
             log.save();
         });
 
+
         req.flash('create', 'Entry Created');
         res.redirect('find');
     })
@@ -144,11 +216,13 @@ exports.entry_create = function (req, res, next) {
 
 
 
+
+
 exports.entry_details = function (req, res, next) {
     Entry.findById(req.params.id, function (err, entry) {
         if (err) return next(err);
 
-        console.log(entry);
+        //        console.log(entry);
         res.render('home-page', {entry: entry});
     })
 };
@@ -168,7 +242,7 @@ exports.entry_update = function (req, res) {
     Entry.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, entry) {
         if (err) return next(err);
         console.log(req.body);
-        
+
         req.flash('update', 'Entry Updated');
         res.redirect('/entry/find');
     });
@@ -195,6 +269,6 @@ exports.entry_delete = function (req, res) {
 
         });
     }
-)}
+                  )}
 
 

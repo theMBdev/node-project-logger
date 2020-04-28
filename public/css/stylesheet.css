@@ -15,15 +15,17 @@
     --black-4: hsl(0, 0%, 30%);
     --black-2: hsl(0, 0%, 40%);
 
-
+    --grey-8: hsl(0, 0%, 72%);
+    --grey-6: hsl(0, 0%, 82%);
     --grey-4: hsl(0, 0%, 92%);
 
-    --green-4: #dbf1c6;
+    --green-4: hsl(91, 61%, 86%);
 
 
 
     /*    Header text colours */
     --daycontainer-date: var(--black-4);
+    --daycontainer-color-fade: var(--grey-8);
 
     --daycontainer-header-title: var(--black-8);
     --daycontainer-header-date: var(--black-2);
@@ -51,7 +53,7 @@ body {
 
 .page-container__day-container {
     background: rgb(221,221,221);
-    background: linear-gradient(0deg, rgba(221,221,221,1) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(0deg, var(--daycontainer-color-fade), rgba(255,255,255,1) 100%);
     padding: 10px 10px 5px 10px;
 }
 
@@ -154,13 +156,19 @@ body {
 /* Create entry page */
 
 .log-selection__log-container {
-    background-color: aquamarine;
-    height: 80px;
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 10px;
+    width: 24%;
+    height: 100px;
+    background-color: white;
+    text-align: center;
+    margin-right: 5px;    
+    margin-bottom: 5px;
+    padding: 5px;
+
+}
+
+.log-selection__log-container:nth-child(4n) {
+    margin-right: 0px;   
+
 }
 
 .log-container__log-box {
@@ -171,6 +179,7 @@ body {
 
 .create-entry__log-selection {
     display: flex;
+    flex-wrap: wrap;
     padding: 10px;
     background-color: antiquewhite;
 }
@@ -189,6 +198,31 @@ body {
 .create-entry__submit {
     margin: 5px 0px;
 }
+
+
+
+
+
+
+
+
+
+.log-container__icon {
+    background-color: gainsboro;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
 
 /* Create log page */
 
@@ -394,3 +428,16 @@ textarea {
 }
 
 
+
+
+
+.log-container__log-text {
+    line-height: 1.1;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+    font-size: 14px;
+    height: 35px;
+}

@@ -28,26 +28,22 @@
                         <% logs.forEach((log) => { %>
 
 
-                        <div id="log-container" class="log-selection__log-container">
+                        <div id="partContainer" class="log-selection__log-container">
 
+                            <div class="log-container__icon"></div>
                             <div id="log1" class="log-container__log-text"><%= log.name %></div>
                         </div>
-
-
                         <% }) %>
 
-                        <!--
-<div id="log-container" class="log-selection__log-container">                            
 
-<div id="log2" class="log-container__log-text">Life Log</div>
-</div>
--->
                     </div>
 
                     <a href="../log/create" class="log-create-link">Create New Log</a>
 
 
                     <input name="logname" id="log" type="hidden">
+
+
 
 
                     <div class="flex-column-center">
@@ -116,49 +112,36 @@
         </main>
 
         <script>
-            // Script for log picker
+            // New script for new style logs
+            var textentry = document.getElementById('log');
 
-            var log1 = document.getElementById('log1');
-            var log2 = document.getElementById('log2');  
-
-            var log = document.getElementById('log');
-
-            var logs = document.querySelectorAll('[id^=log-container]');
-            for(var i in logs){
-                logs.item(i).addEventListener("click", addLog);
+            var boxs = document.querySelectorAll('[id^=partContainer]');
+            for(var i in boxs){
+                boxs.item(i).addEventListener("click", addText);
             }
 
-            function addLog(event) {
-                //remove class from all elements
-                for(var i in logs){
-                    logs.item(i).classList.remove("container__item-selected");
+            function addText(event) {
+
+                // removed highlight from all logs
+                for(var i in boxs){
+                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
                 }
 
-                // add class to clicked element
-                event.target.classList.add("container__item-selected");
+                // adds highlight and gets log name clicked on log
+                if (event.target.classList[0] == "log-selection__log-container") {
+                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
+                    textentry.value = event.target.querySelector('.log-container__log-text').innerHTML;
+                } else {
+                    event.target.parentNode.querySelector('.log-container__icon').classList.add("container__item-selected");
+                    textentry.value = event.target.parentNode.querySelector('.log-container__log-text').innerHTML;
+                }
 
-                // add time selected to input box                
-                log.value = event.target.querySelector('.log-container__log-text').innerHTML;
             }
-
         </script>
 
         <script>
 
             // Script for time picker
-
-            //            var hour0 = document.getElementById('hour0');
-            //            var hour1 = document.getElementById('hour1');
-            //            var hour2 = document.getElementById('hour2');
-            //            var hour3 = document.getElementById('hour3');
-            //            var hour4 = document.getElementById('hour4');
-            //            var hour5 = document.getElementById('hour5');
-            //            var hour6 = document.getElementById('hour6');
-            //
-            //            var min0 = document.getElementById("min0");
-            //            var min15 = document.getElementById("min15");
-            //            var min30 = document.getElementById("min30");
-            //            var min45 = document.getElementById("min45");
 
             var timeHour = document.getElementById('timeHour');
             var timeMinute = document.getElementById('timeMinute');
@@ -184,6 +167,7 @@
 
                 // add class to clicked element
                 event.target.classList.add("container__item-selected");
+
                 // add time selected to input box
                 timeHour.value = event.target.innerHTML;
             }
