@@ -27,18 +27,18 @@ exports.entry_test = function(req, res) {
     })
 }
 
-
-
-
 // only logged in user home page
 exports.entry_find = function(req, res) {
 
     //filter here for the logged in user
 
+
+
+
     Entry.aggregate(
         [
             {
-                
+
                 $match : { user : req.user._id },
 
             },{
@@ -88,14 +88,14 @@ exports.entry_find = function(req, res) {
             }
         }
     );
+
+
+
+
 };
 
 
-
-
-
-
-// all entries on home page
+// all entries on home page - old way
 //exports.entry_find = function(req, res) {
 //    
 //    Entry.aggregate(
@@ -150,7 +150,6 @@ exports.entry_find = function(req, res) {
 //};
 
 
-
 exports.display = function (req, res) {
 
     // all logs
@@ -163,10 +162,14 @@ exports.display = function (req, res) {
         res.render('new-page', {entries: entries, moment: moment});   
 
     })
+
 }
 
 
+
+
 exports.entry_create_view = function (req, res) {
+
 
 
     Log.find({user: req.user._id}, (err, logs) => {
@@ -219,56 +222,88 @@ exports.entry_create = function (req, res, next) {
 
 
 exports.entry_details = function (req, res, next) {
-    Entry.findById(req.params.id, function (err, entry) {
-        if (err) return next(err);
 
-        //        console.log(entry);
-        res.render('home-page', {entry: entry});
-    })
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+
+
+        Entry.findById(req.params.id, function (err, entry) {
+            if (err) return next(err);
+
+            //        console.log(entry);
+            res.render('home-page', {entry: entry});
+        });
+
+    } else {
+        res.send("Thats a bad id(ea)")
+    }
+
 };
 
 
 // start view for update
 exports.entry_update_view = function (req, res) {
-    Entry.findById(req.params.id, function (err, entry) {
-        if (err) return next(err);
 
-        res.render('update-entry', {entry: entry});
-    })
+
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+
+
+        Entry.findById(req.params.id, function (err, entry) {
+            if (err) return next(err);
+
+            res.render('update-entry', {entry: entry});
+        })
+
+    } else {
+        res.send("Thats a bad id(ea)")
+    }
+
 };
 
 
 exports.entry_update = function (req, res) {
-    Entry.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, entry) {
-        if (err) return next(err);
-        console.log(req.body);
 
-        req.flash('update', 'Entry Updated');
-        res.redirect('/entry/find');
-    });
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+
+        Entry.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, entry) {
+            if (err) return next(err);
+            console.log(req.body);
+
+            req.flash('update', 'Entry Updated');
+            res.redirect('/entry/find');
+        });
+
+    } else {
+        res.send("Thats a bad id(ea)");
+    }  
+
 };
 
 
 exports.entry_delete = function (req, res) {
-    Entry.findById(req.params.id, function (err, entry) {
-        if (err) return next(err);
 
-        Log.findOneAndUpdate({name: entry.logname}, {new: true}, function (err, entry) {
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+
+        Entry.findById(req.params.id, function (err, entry) {
             if (err) return next(err);
 
-            // remove from log ref array
-            entry.entries.pull(req.params.id);
-            entry.save();
+            Log.findOneAndUpdate({name: entry.logname}, {new: true}, function (err, entry) {
+                if (err) return next(err);
 
-            Entry.findByIdAndRemove(req.params.id, function (err) {
-                if (err) return next(err);  
+                // remove from log ref array
+                entry.entries.pull(req.params.id);
+                entry.save();
 
-                req.flash('delete', 'Entry Deleted')
-                res.redirect('/entry/find');
-            })
+                Entry.findByIdAndRemove(req.params.id, function (err) {
+                    if (err) return next(err);  
 
+                    req.flash('delete', 'Entry Deleted')
+                    res.redirect('/entry/find');
+                });
+            });
         });
-    }
-                  )}
+    } else {
+        res.send("Thats a bad id(ea)")
+    } 
+}
 
 

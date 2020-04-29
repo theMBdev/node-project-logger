@@ -70,10 +70,10 @@ app.use(passport.session());
 
 // Global variables
 app.use(function(req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
 });
 
 
@@ -84,7 +84,28 @@ app.use('/log', log);
 app.use('/test', test);
 app.use('/user', user);
 
-let port = 3000;
+
+app.use(function(req, res, next){
+    res.status(404);
+
+    // respond with html page
+    if (req.accepts('html')) {
+        res.render('404', { url: req.url });
+        return;
+    }
+
+    // respond with json
+    if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+    }
+
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
+
+
+let port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log('Server is up and running on port ' + port);

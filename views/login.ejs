@@ -13,37 +13,42 @@
 
         <main class="page-container">
 
-            <div class="form-card">        
+            <div class="center-vertical-horizontal">
 
-                <h1>Login</h1>
 
-                <%- include ('./partials/messages') %>
+                <div class="form-card">        
 
-                <form action="/user/login" method="POST">
+                    <h1>Login</h1>
 
-                    <div class="">
-                        <input
-                               type="email"
-                               id="email"
-                               name="email"
-                               class="input input--full-width"
-                               placeholder="Enter Email"
-                               />
+                    <%- include ('./partials/messages') %>
+
+                    <form action="/user/login" method="POST">
+
+                        <div class="">
+                            <input
+                                   type="email"
+                                   id="email"
+                                   name="email"
+                                   class="input input--full-width"
+                                   placeholder="Enter Email"
+                                   />
+                        </div>
+                        <div class="">
+                            <input
+                                   type="password"
+                                   id="password"
+                                   name="password"
+                                   class="input input--full-width"
+                                   placeholder="Enter Password"
+                                   />
+                        </div>
+                        <button type="submit" class="button-primary button-primary--full-width ">Login</button>
+                    </form>
+                    <div class="form-card__switch">
+                        <p class="form-card__text">Don't have an account</p>             
+                        <a class="form-card__link" href="/user/register">Register</a>
                     </div>
-                    <div class="">
-                        <input
-                               type="password"
-                               id="password"
-                               name="password"
-                               class="input input--full-width"
-                               placeholder="Enter Password"
-                               />
-                    </div>
-                    <button type="submit" class="button-primary button-primary--full-width ">Login</button>
-                </form>
-                <div class="form-card__switch">
-                    <p class="form-card__text">Don't have an account</p>             
-                    <a class="form-card__link" href="/user/register">Register</a>
+
                 </div>
 
             </div>

@@ -23,11 +23,13 @@
         <div id="popup"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
         <% } %>
 
-        <form action="create">
-            <button class="button" type="submit" >Create Entry</button>
-        </form>
+
 
         <main class="page-container">
+
+            <form action="create">
+                <button class="button" type="submit" >Create Entry</button>
+            </form>
 
             <% var lastDate %>
             <% var passCount = 1%>
@@ -94,7 +96,7 @@
                             </a>
                         </div>
                         <div class="body--edit">
-                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link">E</a>                           
+                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link"><p class="entry-update-link-color">▼</p></a>                           
 
                         </div>
                     </div>

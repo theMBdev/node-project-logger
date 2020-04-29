@@ -11,81 +11,81 @@
     </head>
     <body>
 
-        <form action="find">
-            <button class="button" type="submit" >Back to Home</button>
-        </form>
-
-
 
         <main class="page-container">
 
-            <div class="page-container__create-entry">
-
-                <form action="/entry/create" method="POST" id="entrycreateform">
-
-                    <div class="create-entry__log-selection">
-
-                        <% logs.forEach((log) => { %>
+            <form action="find">
+                <button class="button" type="submit" >Back to Home</button>
+            </form>
 
 
-                        <div id="partContainer" class="log-selection__log-container">
+                <div class="page-container__create-entry">
 
-                            <div class="log-container__icon"></div>
-                            <div id="log1" class="log-container__log-text"><%= log.name %></div>
-                        </div>
-                        <% }) %>
+                    <form class="form" action="/entry/create" method="POST" id="entrycreateform">
 
+                        <div class="create-entry__log-selection">
 
-                    </div>
-
-                    <a href="../log/create" class="log-create-link">Create New Log</a>
+                            <% logs.forEach((log) => { %>
 
 
-                    <input name="logname" id="log" type="hidden">
+                            <div id="partContainer" class="log-selection__log-container">
 
-
-
-
-                    <div class="flex-column-center">
-
-                        <div class="create-entry__time-selection">
-
-                            <div class="timepicker-container">
-
-
-                                <div class="timepicker-container__title">Hours</div>
-                                <div class="timepicker-container__container">
-                                    <div id="hour0" class="container__item">0</div>
-                                    <div id="hour1" class="container__item">1</div>
-                                    <div id="hour2" class="container__item">2</div>
-                                    <div id="hour3" class="container__item">3</div>
-                                    <div id="hour4" class="container__item">4</div>
-                                    <div id="hour5" class="container__item">5</div>
-                                </div>
-
-                                <div class="timepicker-container__title">Minutes</div>
-                                <div class="timepicker-container__container">
-                                    <div id="min0" class="container__item">0</div>
-                                    <div id="min15" class="container__item">15</div>
-                                    <div id="min30" class="container__item">30</div>
-                                    <div id="min45" class="container__item">45</div>
-                                </div>
-
-
-                                <div class="timepicker-container__finalTimes">
-                                    <div class="finalTimes__input-container">
-                                        <div class="input-title">Hours</div>
-                                        <input class="input input-small" id="timeHour" name="timeHour" type="text">                     
-                                    </div>
-
-                                    <div class="finalTimes__input-container">
-                                        <div class="input-title">Minutes</div>
-                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text">
-                                    </div>
-                                </div>
-
+                                <div class="log-container__icon"></div>
+                                <div id="log1" class="log-container__log-text"><%= log.name %></div>
                             </div>
+                            <% }) %>
+
+
                         </div>
+
+                        <a href="../log/create" class="log-create-link">Create New Log</a>
+
+
+                        <input name="logname" id="log" type="hidden">
+
+
+
+
+                        <div class="flex-column-center">
+
+                            <div class="create-entry__time-selection">
+
+                                <div class="timepicker-container">
+
+
+                                    <div class="timepicker-container__title">Hours</div>
+                                    <div class="timepicker-container__container">
+                                        <div id="hour0" class="container__item">0</div>
+                                        <div id="hour1" class="container__item">1</div>
+                                        <div id="hour2" class="container__item">2</div>
+                                        <div id="hour3" class="container__item">3</div>
+                                        <div id="hour4" class="container__item">4</div>
+                                        <div id="hour5" class="container__item">5</div>
+                                    </div>
+
+                                    <div class="timepicker-container__title">Minutes</div>
+                                    <div class="timepicker-container__container">
+                                        <div id="min0" class="container__item">0</div>
+                                        <div id="min15" class="container__item">15</div>
+                                        <div id="min30" class="container__item">30</div>
+                                        <div id="min45" class="container__item">45</div>
+                                    </div>
+
+
+                                    <div class="timepicker-container__finalTimes">
+                                        <div class="finalTimes__input-container">
+                                            <div class="input-title">Hours</div>
+                                            <input class="input input-small" id="timeHour" name="timeHour" type="text">                     
+                                        </div>
+
+                                        <div class="finalTimes__input-container">
+                                            <div class="input-title">Minutes</div>
+                                            <input class="input input-small" id="timeMinute" name="timeMinute" type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
 
 
                             <textarea placeholder="Enter note..."
@@ -98,15 +98,15 @@
                                       ></textarea>                            
 
 
-                        <div class="create-entry__submit">                        
-                            <button class="button-primary" type="submit" form="entrycreateform">Save</button>
-                        </div>                        
-                    </div>
+                            <div class="create-entry__submit">                        
+                                <button class="button-primary" type="submit" form="entrycreateform">Save</button>
+                            </div>                        
+                        </div>
 
 
-                </form> 
+                    </form> 
 
-            </div>
+                </div>
         </main>
 
         <script>
@@ -122,13 +122,13 @@
 
                 // removed highlight from all logs
                 for(var i in boxs){
-//                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
+                    //                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
                     boxs.item(i).classList.remove("container__item-selected");
                 }
 
                 // adds highlight and gets log name clicked on log
                 if (event.target.classList[0] == "log-selection__log-container") {
-//                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
+                    //                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
                     event.target.classList.add("container__item-selected"); 
                     textentry.value = event.target.querySelector('.log-container__log-text').innerHTML;
                 } else {

@@ -16,13 +16,17 @@ router.post('/create', ensureAuthenticated, entry_controller.entry_create);
 
 router.get("/find", ensureAuthenticated, entry_controller.entry_find);
 
-router.get('/:id', entry_controller.entry_details);
+//router.get('/:id', entry_controller.entry_details);
 
-router.post('/:id/updatep', entry_controller.entry_update);
+router.post('/:id/update', entry_controller.entry_update);
 router.get('/:id/update', entry_controller.entry_update_view);
 
 router.post('/:id/delete', entry_controller.entry_delete);
 
 //router.get('/display', entry_controller.entry_display);
 
+
+
+
 module.exports = router;
+
