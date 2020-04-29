@@ -77,6 +77,7 @@
 
                 <% post.entries.reverse().forEach((entries)=>{ %>
 
+
                 <div class="log__entry">
                     <div class="log__entry__body">
 
@@ -87,13 +88,18 @@
                                 <%= entries.timeMinute %>m
                             </div>
                         </div>
+                        <div class="body--right">   
+                            <a href="../entry/<%= entries._id %>/update" class="qwe">
+                                <p class="body__text"><%= entries.body %></p>
+                            </a>
+                        </div>
+                        <div class="body--edit">
+                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link">E</a>                           
 
-                        <div class="body--right">
-                            <p class="body__text"><%= entries.body %></p>
-                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link">Edit</a>
                         </div>
                     </div>
                 </div>  
+
 
 
                 <% }) %>
@@ -107,7 +113,7 @@
 
         </main>
 
-<!--        Fades out and removed the entry created/updated/deleted flash message -->
+        <!--        Fades out and removed the entry created/updated/deleted flash message -->
         <script>
             var popup = document.getElementById("popup");
 

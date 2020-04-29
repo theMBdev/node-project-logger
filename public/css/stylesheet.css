@@ -14,7 +14,9 @@
     --black-6: hsl(0, 0%, 20%);
     --black-4: hsl(0, 0%, 30%);
     --black-2: hsl(0, 0%, 40%);
+    --black-0: hsl(0, 0%, 50%);
 
+    --grey-10: hsl(0, 0%, 62%);
     --grey-8: hsl(0, 0%, 72%);
     --grey-6: hsl(0, 0%, 82%);
     --grey-4: hsl(0, 0%, 92%);
@@ -26,6 +28,11 @@
     --light-turq: #E3F6F5;
     --dark-turq: #BAE8E8;   
     --lightest-turq: #F4F6F6;
+        
+    
+    
+    
+    
     
 /*    Button and time entry */
     --button-primary: var(--dark-blue);
@@ -36,21 +43,26 @@
 
     /*    Header text colours */
     --daycontainer-date: var(--black-4);
-    --daycontainer-color-fade: var(--grey-8);
+/*    --daycontainer-color-fade: #f6e3e4;*/
 
     --daycontainer-header-title: var(--black-8);
     --daycontainer-header-date: var(--black-2);
-    --daycontainer-header-time: var(--black-4);
-    --daycontainer-header-background: var(--green-4);
+    --daycontainer-header-time: var(--black-2);
+    --daycontainer-header-background: #f2fbfa;
 
     --daycontainer-entry-body: var(--black-6);
-    --daycontainer-entry-time: var(--black-2);
-    --daycontainer-entry-time-background: var(--grey-4);
+    --daycontainer-entry-time: var(--black-0);
+    --daycontainer-entry-time-background: var(--lightest-turq);
+    
+    
+    --shadow-web-kit: -webkit-box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.56); 
+    --shadow: 0px 4px 24px rgba(0, 0, 0, 0.1)
 }
 
 
 body {
-    background-image: linear-gradient(229deg, rgba(248, 248, 248, 0.04) 0%, rgba(248, 248, 248, 0.04) 54%,rgba(112, 112, 112, 0.04) 54%, rgba(112, 112, 112, 0.04) 100%),linear-gradient(239deg, rgba(252, 252, 252, 0.04) 0%, rgba(252, 252, 252, 0.04) 66%,rgba(111, 111, 111, 0.04) 66%, rgba(111, 111, 111, 0.04) 100%),linear-gradient(141deg, rgba(40, 40, 40, 0.04) 0%, rgba(40, 40, 40, 0.04) 44%,rgba(168, 168, 168, 0.04) 44%, rgba(168, 168, 168, 0.04) 100%),linear-gradient(287deg, rgba(40, 40, 40, 0.04) 0%, rgba(40, 40, 40, 0.04) 78%,rgba(141, 141, 141, 0.04) 78%, rgba(141, 141, 141, 0.04) 100%),linear-gradient(90deg, rgba(53, 166, 233, 0.8),rgba(17, 240, 126, 0.8));
+    background-color: hsl(0, 0%, 95%);
+
 }
 
 /* Mobile First */
@@ -62,9 +74,11 @@ body {
     margin: auto;
 }
 
+
+
 .page-container__day-container {
     background: rgb(221,221,221);
-    background: linear-gradient(0deg, var(--daycontainer-color-fade), rgba(255,255,255,1) 100%);
+    background: linear-gradient(to top, #d3cce3, #e9e4f0);
     padding: 10px 10px 5px 10px;
 }
 
@@ -136,6 +150,7 @@ body {
 
 .body__text {
     color: var(--daycontainer-entry-body);
+    height: 100%;
 }
 
 /* pop up message home page*/
@@ -323,6 +338,8 @@ body {
 
 .body--right { 
     padding: 0px 10px;
+    position: relative;
+    width: 100%;
 }
 
 .log__entry_container {
@@ -357,6 +374,7 @@ body {
 .page-container__day-container__date {
     margin-bottom: 10px;
     color: var(--daycontainer-date);
+    text-align: left;
 }
 
 .input-container {
@@ -372,6 +390,10 @@ body {
     border-radius: 5px;
     height: 30px;
     text-align: center;
+}
+
+.input--full-width {   
+    width: 100%;
 }
 
 a:link {
@@ -392,33 +414,32 @@ a:active {
 
 /* unvisited link */
 a:link {
-    color: black;
+    color: var(--dark-blue);
 }
 
 /* visited link */
 a:visited {
-    color: black;
+    color: var(--dark-blue);
 }
 
 /* mouse over link */
 a:hover {
-    color: black;
+    color: var(--dark-blue);
 }
 
 /* selected link */
 a:active {
-    color: black;
+    color: var(--dark-blue);
 }
 
 .entry-update-link {
-    background-color: wheat;
+    background-color: gainsboro;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
     padding: 5px;
-    width: 100px;
-
+    width: 30px;
 }
 
 input[type='text'],
@@ -468,6 +489,59 @@ textarea {
     padding: 10px 25px;
 }
 
+.button-primary--full-width {
+    width: 100%;
+}
+
 .create-entry__add-note {
     
+}
+
+.form-card {
+    width: 400px;
+    background-color: white;
+    padding: 60px;
+    text-align: center;
+    
+box-shadow: var(--shadow);
+}
+.form-card h1 {
+    margin-bottom: 20px;
+}
+.form-card .input {
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 20px;
+}
+
+
+.button-primary--full-width {
+    width: 100%;
+}
+
+.form-flash {
+    margin-bottom: 10px;
+}
+
+.form-card__switch {
+  margin-top: 20px;
+}
+
+.form-card__link {
+    color: var(--dark-blue);
+}
+
+.form-card__text {
+    color: var(--grey-10);
+}
+
+.center-vertical-horizontal {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.page-container__create-entry {
+    box-shadow: var(--shadow);
 }

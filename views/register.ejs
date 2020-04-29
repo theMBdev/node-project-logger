@@ -1,56 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
 
-<h1>Register</h1> 
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <main class="page-container">
 
 
-<%- include ('./partials/messages') %>
+            <div class="form-card">   
 
-<form action="/user/register" method="POST">
-    <div class="">
-        <label for="username">Username</label>
-        <input
-               type="username"
-               id="username"
-               name="username"
-               class="form-control"
-               placeholder="Enter Username"
-               value="<%= typeof username != 'undefined' ? username : '' %>"
-               />
-    </div>
-    <div class="">
-        <label for="email">Email</label>
-        <input
-               type="email"
-               id="email"
-               name="email"
-               class="form-control"
-               placeholder="Enter Email"
-               value="<%= typeof email != 'undefined' ? email : '' %>"
-               />
-    </div>
-    <div class="">
-        <label for="password">Password</label>
-        <input
-               type="password"
-               id="password"
-               name="password"
-               class="form-control"
-               placeholder="Create Password"
-               value="<%= typeof password != 'undefined' ? password : '' %>"
-               />
-    </div>
-    <div class="">
-        <label for="password2">Confirm Password</label>
-        <input
-               type="password"
-               id="password2"
-               name="password2"
-               class="form-control"
-               placeholder="Confirm Password"
-               value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-               />
-    </div>
-    <button type="submit" class="">
-        Register
-    </button>
-</form>
-<p class="">Have An Account? <a href="/user/login">Login</a></p>
+                <h1>Register</h1> 
+
+
+                <%- include ('./partials/messages') %>
+
+                <form action="/user/register" method="POST">
+                    <div class="">
+                        <input
+                               type="username"
+                               id="username"
+                               name="username"
+                               class="input input--full-width"
+                               placeholder="Enter Username"
+                               value="<%= typeof username != 'undefined' ? username : '' %>"
+                               />
+                    </div>
+                    <div class="">
+                        <input
+                               type="email"
+                               id="email"
+                               name="email"
+                               class="input input--full-width"
+                               placeholder="Enter Email"
+                               value="<%= typeof email != 'undefined' ? email : '' %>"
+                               />
+                    </div>
+                    <div class="">
+                        <input
+                               type="password"
+                               id="password"
+                               name="password"
+                               class="input input--full-width"
+                               placeholder="Create Password"
+                               value="<%= typeof password != 'undefined' ? password : '' %>"
+                               />
+                    </div>
+                    <div class="">
+                        <input
+                               type="password"
+                               id="password2"
+                               name="password2"
+                               class="input input--full-width"
+                               placeholder="Confirm Password"
+                               value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                               />
+                    </div>
+                    <button type="submit" class="button-primary button-primary--full-width">
+                        Register
+                    </button>
+                </form>
+                <div class="form-card__switch">
+                <p class="form-card__text">Have An Account? </p>
+                <a class="form-card__link" href="/user/login">Login</a>
+
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
