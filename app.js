@@ -94,6 +94,9 @@ app.use('/log', log);
 app.use('/test', test);
 app.use('/user', user);
 
+app.get('/', function(req,res) {
+    res.redirect('/user/login');
+})
 
 app.use(function(req, res, next){
     res.status(404);
@@ -113,7 +116,6 @@ app.use(function(req, res, next){
     // default to plain-text. send()
     res.type('txt').send('Not found');
 });
-
 
 let port = process.env.PORT || 3000;
 

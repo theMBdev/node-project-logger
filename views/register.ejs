@@ -24,16 +24,7 @@
                     <%- include ('./partials/messages') %>
 
                     <form action="/user/register" method="POST">
-                        <div class="">
-                            <input
-                                   type="username"
-                                   id="username"
-                                   name="username"
-                                   class="input input--full-width"
-                                   placeholder="Enter Username"
-                                   value="<%= typeof username != 'undefined' ? username : '' %>"
-                                   />
-                        </div>
+
                         <div class="">
                             <input
                                    type="email"
