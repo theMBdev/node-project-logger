@@ -11,21 +11,23 @@
     </head>
     <body>
 
-        <% if ( expressFlashCreate.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
-        <% } %>
 
-        <% if ( expressFlashUpdated.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
-        <% } %>
-
-        <% if ( expressFlashDelete.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
-        <% } %>
 
 
 
         <main class="page-container">
+
+            <% if ( expressFlashCreate.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
+            <% } %>
+
+            <% if ( expressFlashUpdated.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
+            <% } %>
+
+            <% if ( expressFlashDelete.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
+            <% } %>
 
             <form action="create">
                 <button class="button" type="submit" >Create Entry</button>
@@ -116,6 +118,7 @@
         </main>
 
         <!--        Fades out and removed the entry created/updated/deleted flash message -->
+
         <script>
             var popup = document.getElementById("popup");
 

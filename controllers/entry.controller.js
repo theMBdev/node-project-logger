@@ -186,35 +186,57 @@ exports.entry_create_view = function (req, res) {
 
 exports.entry_create = function (req, res, next) {
 
-    let entry = new Entry(
-        {            
-            logname: req.body.logname,
-            body: req.body.body,
-            timeHour: req.body.timeHour,
-            timeMinute: req.body.timeMinute,
-            user: req.user.id,
-            date: new Date(),
-        }
-    );
 
-    //    console.log(req.user);
+    const { logname, timeHour, timeMinute, body } = req.body;
+    let errors = [];
 
-    entry.save(function (err, entry) {
-        if (err) {
-            return next(err);
-        }  
+    if (!logname || !timeHour || !timeMinute || !body ) {
+        errors.push({ msg: 'Oops you forgot something' });
 
-        Log.findOne({name: req.body.logname}, function(err, log) {
+            if (errors.length > 0) {                
+                                
+            Log.find({user: req.user._id}, (err, logs) => {
 
-            log.entries.push(entry);
-            log.save();
-        });
+        res.render('create-entry', {logs: logs, moment: moment, errors, timeHour, timeMinute, body, logname});   
 
-
-        req.flash('create', 'Entry Created');
-        res.redirect('find');
     })
+                
+                
+            }
 
+
+    } else {
+
+        let entry = new Entry(
+            {            
+                logname: req.body.logname,
+                body: req.body.body,
+                timeHour: req.body.timeHour,
+                timeMinute: req.body.timeMinute,
+                user: req.user.id,
+                date: new Date(),
+            }
+        );
+
+        //    console.log(req.user);
+
+        entry.save(function (err, entry) {
+            if (err) {
+                return next(err);
+            }  
+
+            Log.findOne({name: req.body.logname}, function(err, log) {
+
+                log.entries.push(entry);
+                log.save();
+            });
+
+
+            req.flash('create', 'Entry Created');
+            res.redirect('find');
+        })
+
+    }
 };    
 
 

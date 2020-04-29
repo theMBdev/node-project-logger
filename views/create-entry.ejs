@@ -14,99 +14,102 @@
 
         <main class="page-container">
 
+            <%- include ('./partials/messages') %>
+
+
             <form action="find">
                 <button class="button" type="submit" >Back to Home</button>
             </form>
 
 
-                <div class="page-container__create-entry">
+            <div class="page-container__create-entry">
 
-                    <form class="form" action="/entry/create" method="POST" id="entrycreateform">
+                <form class="form" action="/entry/create" method="POST" id="entrycreateform">
 
-                        <div class="create-entry__log-selection">
+                    <div class="create-entry__log-selection">
 
-                            <% logs.forEach((log) => { %>
-
-
-                            <div id="partContainer" class="log-selection__log-container">
-
-                                <div class="log-container__icon"></div>
-                                <div id="log1" class="log-container__log-text"><%= log.name %></div>
-                            </div>
-                            <% }) %>
+                        <% logs.forEach((log) => { %>
 
 
+                        <div id="partContainer" class="log-selection__log-container">
+
+                            <div class="log-container__icon"></div>
+                            <div id="log1" class="log-container__log-text"><%= log.name %></div>
                         </div>
-
-                        <a href="../log/create" class="log-create-link">Create New Log</a>
-
-
-                        <input name="logname" id="log" type="hidden">
+                        <% }) %>
 
 
+                    </div>
+
+                    <a href="../log/create" class="log-create-link">Create New Log</a>
 
 
-                        <div class="flex-column-center">
-
-                            <div class="create-entry__time-selection">
-
-                                <div class="timepicker-container">
+                    <input name="logname" id="log" type="hidden" value="<%= typeof logname != 'undefined' ? logname : '' %>">
 
 
-                                    <div class="timepicker-container__title">Hours</div>
-                                    <div class="timepicker-container__container">
-                                        <div id="hour0" class="container__item">0</div>
-                                        <div id="hour1" class="container__item">1</div>
-                                        <div id="hour2" class="container__item">2</div>
-                                        <div id="hour3" class="container__item">3</div>
-                                        <div id="hour4" class="container__item">4</div>
-                                        <div id="hour5" class="container__item">5</div>
-                                    </div>
 
-                                    <div class="timepicker-container__title">Minutes</div>
-                                    <div class="timepicker-container__container">
-                                        <div id="min0" class="container__item">0</div>
-                                        <div id="min15" class="container__item">15</div>
-                                        <div id="min30" class="container__item">30</div>
-                                        <div id="min45" class="container__item">45</div>
-                                    </div>
+                    <div class="flex-column-center">
+
+                        <div class="create-entry__time-selection">
+
+                            <div class="timepicker-container">
 
 
-                                    <div class="timepicker-container__finalTimes">
-                                        <div class="finalTimes__input-container">
-                                            <div class="input-title">Hours</div>
-                                            <input class="input input-small" id="timeHour" name="timeHour" type="text">                     
-                                        </div>
-
-                                        <div class="finalTimes__input-container">
-                                            <div class="input-title">Minutes</div>
-                                            <input class="input input-small" id="timeMinute" name="timeMinute" type="text">
-                                        </div>
-                                    </div>
-
+                                <div class="timepicker-container__title">Hours</div>
+                                <div class="timepicker-container__container">
+                                    <div id="hour0" class="container__item">0</div>
+                                    <div id="hour1" class="container__item">1</div>
+                                    <div id="hour2" class="container__item">2</div>
+                                    <div id="hour3" class="container__item">3</div>
+                                    <div id="hour4" class="container__item">4</div>
+                                    <div id="hour5" class="container__item">5</div>
                                 </div>
+
+                                <div class="timepicker-container__title">Minutes</div>
+                                <div class="timepicker-container__container">
+                                    <div id="min0" class="container__item">0</div>
+                                    <div id="min15" class="container__item">15</div>
+                                    <div id="min30" class="container__item">30</div>
+                                    <div id="min45" class="container__item">45</div>
+                                </div>
+
+
+                                <div class="timepicker-container__finalTimes">
+                                    <div class="finalTimes__input-container">
+                                        <div class="input-title">Hours</div>
+                                        <input class="input input-small" id="timeHour" name="timeHour" type="text" value="<%= typeof timeHour != 'undefined' ? timeHour : '' %>">                     
+                                    </div>
+
+                                    <div class="finalTimes__input-container">
+                                        <div class="input-title">Minutes</div>
+                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text" value="<%= typeof timeMinute != 'undefined' ? timeMinute : '' %>">
+                                    </div>
+                                </div>
+
                             </div>
-
-
-                            <textarea placeholder="Enter note..."
-                                      type="text"
-                                      name="body" 
-                                      id="body" 
-                                      rows="4" 
-                                      cols="50" 
-                                      class="create-entry__add-note__textarea"
-                                      ></textarea>                            
-
-
-                            <div class="create-entry__submit">                        
-                                <button class="button-primary" type="submit" form="entrycreateform">Save</button>
-                            </div>                        
                         </div>
 
 
-                    </form> 
+                        <textarea placeholder="Enter note..."
+                                  type="text"
+                                  name="body" 
+                                  id="body" 
+                                  rows="4" 
+                                  cols="50" 
+                                  class="create-entry__add-note__textarea"
 
-                </div>
+                                  ><%= typeof body != 'undefined' ? body : '' %></textarea>                            
+
+
+                        <div class="create-entry__submit">                        
+                            <button class="button-primary" type="submit" form="entrycreateform">Save</button>
+                        </div>                        
+                    </div>
+
+
+                </form> 
+
+            </div>
         </main>
 
         <script>
@@ -118,8 +121,21 @@
                 boxs.item(i).addEventListener("click", addText);
             }
 
-            function addText(event) {
+            // highlight the pre selected times
+            function addClassToLogElements() {
 
+                for(var i in boxs){
+                    if (textentry.value == boxs.item(i).querySelector('.log-container__log-text').innerHTML) {
+                        console.log("IN IN IN")
+                        
+                        boxs.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+            }
+            addClassToLogElements();
+
+
+            function addText(event) {
                 // removed highlight from all logs
                 for(var i in boxs){
                     //                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
@@ -183,6 +199,23 @@
                 // add time selected to input box
                 timeMinute.value = event.target.innerHTML;
             }
+
+            // highlight the pre selected times
+            function addClassToTimeElements() {
+                //remove class from all elements
+                for(var i in minutesBox){
+                    if (timeMinute.value == minutesBox.item(i).innerHTML) {
+                        minutesBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+
+                for(var i in hoursBox){
+                    if (timeHour.value == hoursBox.item(i).innerHTML) {
+                        hoursBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+            }
+            addClassToTimeElements();
 
         </script>    
 

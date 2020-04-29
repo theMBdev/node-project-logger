@@ -72,6 +72,7 @@ body {
     max-width:400px;
 /*    background-color: white;*/
     margin: auto;
+    position: relative;
 }
 
 
@@ -158,15 +159,19 @@ body {
 #popup {
     opacity: 1;
     transition: opacity 1s; 
+    
+/*
     padding: 15px;
     background-color: #d4edda;
     border: 1px solid #c3e6cb;
     border-radius: 5px;
-    color: #155724;
+    color: #155724;    
+*/
+    
     position: absolute;
     top: 0px;
     z-index: 5;
-    width: 100%;
+    
 }
 
 #popup.fade {
