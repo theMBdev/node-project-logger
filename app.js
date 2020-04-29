@@ -40,7 +40,17 @@ moment().format();
 app.use(express.static(__dirname + '/public'));
 
 
-const config = require('./config/config');
+// 0 for dev mode
+var mode = 1;
+
+if (mode == 0) {
+    // DEV
+    var config = require('./config/config');
+} else {
+    // Heroku
+    var config = require('./config/configForHeroku');
+}
+
 mongodbUser = config.mongodbUser;
 mongodbPassword = config.mongodbPassword;
 dbString = config.dbString;
