@@ -174,8 +174,9 @@ exports.entry_create_view = function (req, res) {
 
     Log.find({user: req.user._id}, (err, logs) => {
 
-        //        console.log("cops " ,entries.entries[1]);
-        //        console.log(req.user);
+        if(!logs[0]){
+            res.render('create-log', {logs: logs, moment: moment});   
+        }
 
         res.render('create-entry', {logs: logs, moment: moment});   
 
@@ -193,16 +194,16 @@ exports.entry_create = function (req, res, next) {
     if (!logname || !timeHour || !timeMinute || !body ) {
         errors.push({ msg: 'Oops you forgot something' });
 
-            if (errors.length > 0) {                
-                                
+        if (errors.length > 0) {                
+
             Log.find({user: req.user._id}, (err, logs) => {
 
-        res.render('create-entry', {logs: logs, moment: moment, errors, timeHour, timeMinute, body, logname});   
+                res.render('create-entry', {logs: logs, moment: moment, errors, timeHour, timeMinute, body, logname});   
 
-    })
-                
-                
-            }
+            })
+
+
+        }
 
 
     } else {

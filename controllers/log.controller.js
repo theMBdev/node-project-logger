@@ -10,33 +10,61 @@ exports.test = function (req, res) {
 };
 
 
-exports.log_create_view = function (req, res) {
+exports.log_create_view = function (req, res) {    
 
-    res.render('create-log');   
+    // check if user has logs if not show empty state
+    Log.find({user: req.user._id}, (err, logs) => {
+
+        res.render('create-log', {logs: logs, moment: moment});   
+
+    })     
 
 };
 
 exports.log_create = function (req, res, next) {
-    let log = new Log(
-        {
-            name: req.body.name,
-            user: req.user.id
+
+
+    const { name } = req.body;
+    let errors = [];
+
+    if (!name) {
+        errors.push({ msg: 'Please enter a log name' });
+
+        if (errors.length > 0) {                
+
+            Log.find({user: req.user._id}, (err, logs) => {
+
+                res.render('create-log', {logs: logs, moment: moment, errors});   
+
+            })
+
         }
-    );
-
-    log.save(function (err, log) {
-        if (err) {
-            return next(err);
-        }
-
-        // CODE FOR WHEN A LOG IS CREATED ADD TO USERS LOGS 
-        req.user.logs.push(log);
-        req.user.save();
 
 
+    } else {
+
+
+        let log = new Log(
+            {
+                name: req.body.name,
+                user: req.user.id
+            }
+        );
+
+        log.save(function (err, log) {
+            if (err) {
+                return next(err);
+            }
+
+            // CODE FOR WHEN A LOG IS CREATED ADD TO USERS LOGS 
+            req.user.logs.push(log);
+            req.user.save();
 
 
 
-        res.redirect('../entry/create');
-    })
+
+
+            res.redirect('../entry/create');
+        })
+    }
 };

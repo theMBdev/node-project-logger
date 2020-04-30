@@ -29,12 +29,27 @@
             <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
             <% } %>
 
-            <form action="create">
-                <button class="button" type="submit" >Create Entry</button>
-            </form>
-
             <% var lastDate %>
             <% var passCount = 1%>
+
+            <% if(!entries[0]) { %>
+
+            <img class="home-page-intro-image" src="/images/home-page-empty2.svg" alt="">
+
+            <p class="home-page-intro-text">Hi there
+                <br>
+                go ahead and create your first entry</p>
+
+            <form action="create">
+                <div class="create-entry__submit">                        
+                    <button class="button-primary" type="submit">Create Entry</button>
+                </div>
+            </form>
+
+            <% } else { %>
+
+            <%= console.log(entries) %>
+
 
             <% entries.forEach((post)=>{ %>
 
@@ -114,8 +129,13 @@
             <% }) %>
 
 
+            <% } %>
 
         </main>
+        <%- include ('./partials/navbar-mobile') %>
+
+
+
 
         <!--        Fades out and removed the entry created/updated/deleted flash message -->
 

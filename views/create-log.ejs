@@ -19,7 +19,17 @@
                 <button class="button" type="submit">Back</button>
             </form>
 
+
             <div class="page-container__create-entry">
+                <%- include ('./partials/messages') %>
+
+                <% if(!logs[0]) { %>
+
+                <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
+
+                <p class="home-page-intro-text">First create a log were your entries will be stored</p>
+
+                <% } %>
 
                 <form action="/log/create" method="POST">
 
@@ -32,8 +42,9 @@
                         </div>
 
                         <div class="create-entry__submit">                        
-                            <input class="button-primary" type="submit" value="Create Log">
-                        </div>                        
+                            <button class="button-primary" type="submit" form="entrycreateform">Create Log</button>
+                        </div>                    
+
                     </div>
 
                 </form> 

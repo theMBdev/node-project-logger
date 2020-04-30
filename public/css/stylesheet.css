@@ -22,19 +22,19 @@
     --grey-4: hsl(0, 0%, 92%);
 
     --green-4: hsl(91, 61%, 86%);
-    
-    
+
+
     --dark-blue: #272343;
     --light-turq: #E3F6F5;
     --dark-turq: #BAE8E8;   
     --lightest-turq: #F4F6F6;
-        
-    
-    
-    
-    
-    
-/*    Button and time entry */
+
+
+
+
+
+
+    /*    Button and time entry */
     --button-primary: var(--dark-blue);
     --create-new-log-button: var(--light-turq);
     --time-selector-background-selected: var(--dark-turq);
@@ -43,7 +43,7 @@
 
     /*    Header text colours */
     --daycontainer-date: var(--black-4);
-/*    --daycontainer-color-fade: #f6e3e4;*/
+    /*    --daycontainer-color-fade: #f6e3e4;*/
 
     --daycontainer-header-title: var(--black-8);
     --daycontainer-header-date: var(--black-2);
@@ -53,8 +53,8 @@
     --daycontainer-entry-body: var(--black-6);
     --daycontainer-entry-time: var(--black-0);
     --daycontainer-entry-time-background: var(--lightest-turq);
-    
-    
+
+
     --shadow-web-kit: -webkit-box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.56); 
     --shadow: 0px 4px 24px rgba(0, 0, 0, 0.1)
 }
@@ -69,10 +69,12 @@ body {
 
 /* Home page - display entrys*/
 .page-container {
-    max-width:400px;
+    max-width: 400px;
+    min-height: 100vh;
 /*    background-color: white;*/
     margin: auto;
     position: relative;
+    margin-bottom: 70px;
 }
 
 
@@ -159,19 +161,19 @@ body {
 #popup {
     opacity: 1;
     transition: opacity 1s; 
-    
-/*
+
+    /*
     padding: 15px;
     background-color: #d4edda;
     border: 1px solid #c3e6cb;
     border-radius: 5px;
     color: #155724;    
-*/
-    
+    */
+
     position: absolute;
     top: 0px;
     z-index: 5;
-    
+
 }
 
 #popup.fade {
@@ -189,7 +191,7 @@ body {
 .log-selection__log-container {
     width: 23.5%;
     height: 110px;
-/*    background-color: white;*/
+    /*    background-color: white;*/
     text-align: center;
     margin-right: 5px;    
     margin-bottom: 5px;
@@ -231,6 +233,8 @@ body {
 
 .create-entry__submit {
     margin: 5px 0px;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -366,10 +370,12 @@ body {
 
 }
 
+/*
 .test {
-    background: linear-gradient(180deg, rgba(255,183,183,1) 0%, rgba(255,255,255,1) 100%);
-    width: 500px;
+background: linear-gradient(180deg, rgba(255,183,183,1) 0%, rgba(255,255,255,1) 100%);
+width: 500px;
 }
+*/
 
 .button {
     padding: 10px;
@@ -397,6 +403,7 @@ body {
     border-radius: 5px;
     height: 30px;
     text-align: center;
+    font-size: 16px;
 }
 
 .input--full-width {   
@@ -480,10 +487,10 @@ textarea {
 .log-container__log-text {
     line-height: 1.1;
     overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 2; /* number of lines to show */
-   -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
     font-size: 14px;
     height: 35px;
 }
@@ -494,6 +501,7 @@ textarea {
     border-radius: 5px;
     border: none;
     padding: 10px 25px;
+    font-size: 16px;
 }
 
 .button-primary--full-width {
@@ -501,16 +509,17 @@ textarea {
 }
 
 .create-entry__add-note {
-    
+
 }
 
 .form-card {
-    width: 400px;
+    max-width: 500px;
+    width: 100%;
     background-color: white;
     padding: 60px;
     text-align: center;
     border-radius: 5px;
-box-shadow: var(--shadow);
+    box-shadow: var(--shadow);
 }
 .form-card h1 {
     margin-bottom: 20px;
@@ -551,7 +560,7 @@ box-shadow: var(--shadow);
 }
 
 .form-card__switch {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .form-card__link {
@@ -577,7 +586,7 @@ box-shadow: var(--shadow);
     padding-bottom: 10px;
 }
 .form {
-        background-color: white;
+    background-color: white;
     border-radius: 5px;
 }
 
@@ -601,4 +610,117 @@ box-shadow: var(--shadow);
 .delete-form {
     display: flex;
     justify-content: center;    
+}
+
+.home-page-intro-image {
+    width: 70%;   
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+    left: -10px;
+}
+
+.create-log-intro-image {
+    width: 45%;   
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+.home-page-intro-text {
+    font-size: 18px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--black-2);
+    max-width: 300px;
+}
+
+
+
+/* navbar-mobile */
+.navbar-mobile {
+        max-width: 400px;
+/*    width: 400px;*/
+    /*    margin: auto;*/
+    height: 70px;
+    background-color: #272343;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-mobile__link {
+    width: 24px;
+    height: 24px;
+/*    background-color: green;*/
+    margin: auto;
+    margin-bottom: 2px;
+}
+
+.navbar-mobile__link-circle {
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #272343;
+    position: relative;
+    top: -20px;
+    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.35);
+}
+
+.navbar-mobile__link-container {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top:-7px;
+    
+}
+
+.add-icon {
+    width: 20px;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;  /* Preferred icon size */
+  width: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+.navbar-mobile__link-text {
+    font-size: 11px;
 }
