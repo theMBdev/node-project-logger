@@ -71,6 +71,14 @@ body {
 .page-container {
     max-width: 400px;
     min-height: 100vh;
+    background-color: white;
+    margin: auto;
+    position: relative;    
+}
+
+.page-container-with-mobile-nav {
+    max-width: 400px;
+    min-height: 100vh;
     padding-bottom: 70px;
     background-color: white;
     margin: auto;
@@ -449,7 +457,7 @@ a:active {
 }
 
 .entry-update-link {
-/*    background-color: hsl(0, 0%, 99%);*/
+    /*    background-color: hsl(0, 0%, 99%);*/
     display: flex;
     justify-content: center;
     align-content: center;
@@ -598,7 +606,7 @@ textarea {
     border-radius: 5px;
     padding-bottom: 20px;
     padding-top: 20px;
-        height: 100vh;
+    height: calc(100vh - 40px);
     display: flex;
     flex-direction: column;
 
@@ -672,8 +680,8 @@ textarea {
 
 /* navbar-mobile */
 .navbar-mobile {
-        max-width: 400px;
-/*    width: 400px;*/
+    max-width: 400px;
+    /*    width: 400px;*/
     /*    margin: auto;*/
     height: 70px;
     background-color: #272343;
@@ -693,7 +701,7 @@ textarea {
 .navbar-mobile__link {
     width: 24px;
     height: 24px;
-/*    background-color: green;*/
+    /*    background-color: green;*/
     margin: auto;
     margin-bottom: 2px;
 }
@@ -721,7 +729,7 @@ textarea {
     color: white;
     position: relative;
     top:-7px;
-    
+
 }
 
 .add-icon {
@@ -729,29 +737,29 @@ textarea {
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 18px;  /* Preferred icon size */
-  width: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;  /* Preferred icon size */
+    width: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
 
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
 
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+    /* Support for IE. */
+    font-feature-settings: 'liga';
 }
 .navbar-mobile__link-text {
     font-size: 11px;
@@ -773,7 +781,7 @@ textarea {
 }
 
 .left, .right {
-  flex: 1;
+    flex: 1;
 }
 
 .center {
