@@ -17,6 +17,7 @@
 
         <main class="page-container">
 
+
             <% if ( expressFlashCreate.length > 0 ) { %>
             <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
             <% } %>
@@ -32,20 +33,35 @@
             <% var lastDate %>
             <% var passCount = 1%>
 
-            <% if(!entries[0]) { %>
+            <div class="top-nav">
+                <div class="left">
 
-            <img class="home-page-intro-image" src="/images/home-page-empty2.svg" alt="">
-
-            <p class="home-page-intro-text">Hi there
-                <br>
-                go ahead and create your first entry</p>
-
-            <form action="create">
-                <div class="create-entry__submit">                        
-                    <button class="button-primary" type="submit">Create Entry</button>
                 </div>
-            </form>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
 
+            </div>
+            
+            <% if(!entries[0]) { %>
+            <div class="page-container__home">
+
+                <div class="page-container__home__empty-state">
+
+
+                    <img class="home-page-intro-image" src="/images/home-page-empty2.svg" alt="">
+
+                    <p class="home-page-intro-text">Hi there
+                        <br>
+                        go ahead and create your first entry</p>
+
+                    <form action="create">
+                        <div class="create-entry__submit">                        
+                            <button class="button-primary" type="submit">Create Entry</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
             <% } else { %>
 
             <%= console.log(entries) %>

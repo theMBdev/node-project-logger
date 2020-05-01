@@ -15,42 +15,65 @@
 
         <main class="page-container">
 
-            <form action="../entry/create">
-                <button class="button" type="submit">Back</button>
-            </form>
+            <%- include ('./partials/messages') %>
 
 
-            <div class="page-container__create-entry">
+            <% if(!logs[0]) { %>
+
+            <div class="page-container__create-log">
                 <%- include ('./partials/messages') %>
 
-                <% if(!logs[0]) { %>
+                <div class="top-nav">
+                    <div class="left">
+                        <form action="../entry/create">
+                            <button class="button" type="submit">Back</button>
+                        </form>
+                    </div>
+                    <div class="center"><h3>Product Name</h3></div>
+                    <div class="right"></div>
+                </div>
 
                 <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
 
                 <p class="home-page-intro-text">First create a log were your entries will be stored</p>
 
-                <% } %>
+                <% } else { %>
 
-                <form action="/log/create" method="POST">
+                <div class="top-nav">
+                    <div class="left">
+                        <form action="../entry/create">
+                            <button class="button" type="submit">Back</button>
+                        </form>
+                    </div>
+                    <div class="center"><h3>Product Name</h3></div>
+                    <div class="right"></div>
 
-                    <div class="flex-column-center"> 
+                </div>
 
-                        <div class="input-container">
 
-                            <div class="input-title">Log name</div>
-                            <input class="input" name="name" id="log" type="text">
+                <div class="page-container__create-log">
+                    <% } %>
+
+                    <form action="/log/create" method="POST">
+
+                        <div class="flex-column-center"> 
+
+                            <div class="input-container">
+
+                                <div class="input-title">Log name</div>
+                                <input class="input" name="name" id="log" type="text">
+                            </div>
+
+                            <div class="create-entry__submit">                        
+                                <button class="button-primary" type="submit">Create Log</button>
+                            </div>                    
+
                         </div>
 
-                        <div class="create-entry__submit">                        
-                            <button class="button-primary" type="submit" form="entrycreateform">Create Log</button>
-                        </div>                    
+                    </form> 
 
-                    </div>
+                </div>
+                </main>
 
-                </form> 
-
-            </div>
-        </main>
-
-    </body>
-</html>
+            </body>
+        </html>
