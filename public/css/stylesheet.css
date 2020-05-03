@@ -199,12 +199,13 @@ body {
 /* Create entry page */
 
 .log-selection__log-container {
-    width: 100%;
+/*    width: 90px;*/
     height: 110px;
     /*    background-color: white;*/
     text-align: center;
     border-radius: 5px;
-    padding: 5px;
+/*    padding: 5px;*/
+/*    margin: auto;*/
 
 }
 
@@ -219,13 +220,12 @@ body {
 }
 
 .create-entry__log-selection {
-padding: 10px 10px 20px 10px;
+padding: 10px 10px 10px 10px;
     background-color: var(--select-log-backround);
     border-radius: 5px 5px 0px 0px;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(60px, auto));
-    grid-auto-rows: minmax(100px, 10px);	
+    grid-template-columns: repeat(auto-fill, minmax(80px, auto));
 }
 
 
@@ -263,7 +263,7 @@ padding: 10px 10px 20px 10px;
     border-radius: 5px;
     margin: auto;
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 
@@ -504,6 +504,10 @@ textarea {
     -webkit-box-orient: vertical;
     font-size: 14px;
     height: 35px;
+    
+        max-width: 70px;
+    margin: auto;
+    text-align: center;
 }
 
 .button-primary {
