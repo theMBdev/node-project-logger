@@ -18,8 +18,8 @@ exports.entry_test = function(req, res) {
     Log.find({name: "Dev Log"}).populate("entries").exec((err, entries) => {
 
 
-        console.log("cops " ,entries.entries[0]);
-        console.log(entries);
+//        console.log("cops " ,entries.entries[0]);
+//        console.log(entries);
 
         res.send(entries);
 
@@ -156,8 +156,8 @@ exports.display = function (req, res) {
     Log.find({}).populate("entries").exec((err, entries) => {
 
 
-        console.log("cops " ,entries.entries[1]);
-        console.log(entries);
+//        console.log("cops " ,entries.entries[1]);
+//        console.log(entries);
 
         res.render('new-page', {entries: entries, moment: moment});   
 
@@ -257,7 +257,8 @@ exports.entry_details = function (req, res, next) {
         });
 
     } else {
-        res.send("Thats a bad id(ea)")
+//        res.send("Thats a bad id(ea)")
+        res.render('500'); 
     }
 
 };
@@ -277,7 +278,8 @@ exports.entry_update_view = function (req, res) {
         })
 
     } else {
-        res.send("Thats a bad id(ea)")
+        //        res.send("Thats a bad id(ea)")
+        res.render('500'); 
     }
 
 };
@@ -296,7 +298,8 @@ exports.entry_update = function (req, res) {
         });
 
     } else {
-        res.send("Thats a bad id(ea)");
+        //        res.send("Thats a bad id(ea)");
+        res.render('500'); 
     }  
 
 };
@@ -325,7 +328,9 @@ exports.entry_delete = function (req, res) {
             });
         });
     } else {
-        res.send("Thats a bad id(ea)")
+        //        res.send("Thats a bad id(ea)")
+        res.render('500');   
+
     } 
 }
 

@@ -645,6 +645,12 @@ textarea {
     font-size: 16px;
 }
 
+.button-delete--small {
+    border-radius: 5px;
+    padding: 5px 15px; 
+    font-size: 16px;
+}
+
 .delete-form {
     display: flex;
     justify-content: center;    
@@ -786,4 +792,26 @@ textarea {
 
 .center {
     font-size: 12px;
+}
+
+.image-404 {
+    width: 60%;   
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.text-404 {
+    text-align: center;
+}
+
+.delete-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.delete-container__text .text{
+    font-weight: 600;
 }

@@ -1,5 +1,6 @@
 const Log = require('../models/log.model');
 const User = require('../models/user.model');
+const Entry = require('../models/entry.model');
 
 var moment = require('moment');
 moment().format();
@@ -34,15 +35,12 @@ exports.log_create = function (req, res, next) {
 
             Log.find({user: req.user._id}, (err, logs) => {
 
-                res.render('create-log', {logs: logs, moment: moment, errors});   
-
+                res.render('create-log', {logs: logs, moment: moment, errors});
             })
-
         }
 
 
     } else {
-
 
         let log = new Log(
             {
@@ -61,10 +59,80 @@ exports.log_create = function (req, res, next) {
             req.user.save();
 
 
-
-
-
             res.redirect('../entry/create');
         })
     }
 };
+
+exports.log_create_view = function (req, res) {    
+
+    // check if user has logs if not show empty state
+    Log.find({user: req.user._id}, (err, logs) => {
+
+        res.render('create-log', {logs: logs, moment: moment});   
+
+    })     
+
+};
+
+
+
+exports.log_delete_view = function (req, res) {    
+
+    // check if user has logs if not show empty state
+    Log.find({user: req.user._id}, (err, logs) => {
+
+        //        console.log("Logs Of User", logs)
+
+        res.render('delete-log', {logs: logs, moment: moment});   
+
+    })     
+
+};
+
+
+exports.log_delete = function (req, res) {
+
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+
+        Log.findById(req.params.id, function (err, logs) {
+            if (err) return next(err);
+
+            // remove all entries withing the log being removed
+            logs.entries.forEach(element => { 
+                console.log("elm", element)
+
+
+                Entry.findByIdAndRemove(element, function (err) {
+                    if (err) return next(err);  
+                    console.log("Removed", element)
+                    //                    req.flash('delete', 'Log Deleted')
+                    //                    res.redirect('/entry/find');
+                });
+
+            });
+
+            //  remove log id from user ref            
+            User.findOneAndUpdate({_id: req.user.id}, {new: true}, function (err, user) {
+                if (err) return next(err);
+
+                // remove log id from user logs ref array
+                user.logs.pull(req.params.id);
+                user.save();
+
+
+                // remove log
+                Log.findByIdAndRemove(req.params.id, function (err) {
+                    if (err) return next(err);  
+
+                    req.flash('delete', 'Log Deleted')
+                    res.redirect('/entry/find');
+                });
+            });
+        });
+    } else {
+        //        res.send("Thats a bad id(ea)")
+        res.render('500');   
+
+    } 
+}
