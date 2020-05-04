@@ -20,60 +20,98 @@
 
             <% if(!logs[0]) { %>
 
+            <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
+
+            <p class="home-page-intro-text">First create a log were your entries will be stored</p>            
+
+            <% } else { %>
+
+            <div class="top-nav">
+                <div class="left">
+                    <form action="../entry/create">
+                        <button class="button" type="submit">Back</button>
+                    </form>
+                </div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+
+            </div>
+
+
             <div class="page-container__create-log">
-                <%- include ('./partials/messages') %>
+                <% } %>
 
-                <div class="top-nav">
-                    <div class="left">
-                        <form action="../entry/create">
-                            <button class="button" type="submit">Back</button>
-                        </form>
-                    </div>
-                    <div class="center"><h3>Product Name</h3></div>
-                    <div class="right"></div>
-                </div>
+                <form action="/log/create" method="POST">
 
-                <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
+                    <div class="flex-column-center"> 
 
-                <p class="home-page-intro-text">First create a log were your entries will be stored</p>
+                        <div class="input-container">
+                            <div class="input-title">Log name</div>
+                            <input class="input" name="name" id="log" type="text">
+                        </div>
 
-                <% } else { %>
-
-                <div class="top-nav">
-                    <div class="left">
-                        <form action="../entry/create">
-                            <button class="button" type="submit">Back</button>
-                        </form>
-                    </div>
-                    <div class="center"><h3>Product Name</h3></div>
-                    <div class="right"></div>
-
-                </div>
-
-
-                <div class="page-container__create-log">
-                    <% } %>
-
-                    <form action="/log/create" method="POST">
-
-                        <div class="flex-column-center"> 
-
-                            <div class="input-container">
-
-                                <div class="input-title">Log name</div>
-                                <input class="input" name="name" id="log" type="text">
+                        <div class="color-container">
+                            <p> Select color </p>
+                            <div class="color-container__row">
+                                <div id="color-selector" data-color="#FFB2B2" class="color-container__color color-container__color--red"><div class="color-icon">✓</div></div>
+                                <div id="color-selector" data-color="#FFEDB2" class="color-container__color color-container__color--yellow"><div class="color-icon">✓</div></div>
+                                <div id="color-selector" data-color="#BEFFB2" class="color-container__color color-container__color--green"><div class="color-icon">✓</div></div>
+                                <div id="color-selector" data-color="#B2FFFF" class="color-container__color color-container__color--light-blue"><div class="color-icon">✓</div></div>
+                                <div id="color-selector" data-color="#B2C7FF" class="color-container__color color-container__color--blue"><div class="color-icon">✓</div></div>
+                                <div id="color-selector" data-color="#F7B2FF" class="color-container__color color-container__color--pink"><div class="color-icon">✓</div></div>
                             </div>
-
-                            <div class="create-entry__submit">                        
-                                <button class="button-primary" type="submit">Create Log</button>
-                            </div>                    
+                            <input class="input" name="color" id="color-text" type="hidden">
 
                         </div>
 
-                    </form> 
+                        <div class="create-entry__submit">                        
+                            <button class="button-primary" type="submit">Create Log</button>
+                        </div>  
 
-                </div>
-                </main>
+                        <script>
+                            // 
+                            var colorentry = document.getElementById('color-text');
 
-            </body>
-        </html>
+                            var colors = document.querySelectorAll('[id^=color-selector]');
+
+                            for(var i in colors){
+                                colors.item(i).addEventListener("click", addColor);
+                            }
+
+                            function addColor(event) {
+
+                                // removed icon from all colors
+                                for(var i in colors){
+                                    colors.item(i).firstChild.classList.remove("color-selected");
+                                }
+
+                                // adds icon and gets attribute of clicked on                                
+
+                                if(event.target.firstChild.classList) {
+                                    event.target.firstChild.classList.add("color-selected"); 
+                                    colorentry.value = event.target.getAttribute("data-color");
+                                } else {
+                                    event.target.classList.add("color-selected")
+                                    colorentry.value = event.target.parentNode.getAttribute("data-color");
+                                }                
+
+
+//                                console.log(event.target.parentNode)
+                                
+                                
+                                
+                                
+//                                 colors.item(1).setAttribute('style', 'background-color: #fff');
+
+                            }
+                        </script>
+
+                    </div>
+
+                </form> 
+
+            </div>
+        </main>
+
+    </body>
+</html>

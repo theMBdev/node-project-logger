@@ -85,13 +85,17 @@
             <h3 class="page-container__day-container__date"><%= post._id.dateFormated %></h3>
             <% } %>
 
-            <div class="log__header">
+<!--            you make the db entry here to set the color -->
+            <div id="log-header" class="log__header" style="background: <%= post._id.color %>"> 
 
+                
                 <div class="log__header--left">
                     <div class="log__header__title"><%= post._id.logname %></div>
                     <div class="log__header__date"><%= post._id.dateFormated %></div>
                 </div>
 
+
+                
                 <div class="log__header--right">
                     <div class="log__header__time">
 
@@ -106,13 +110,12 @@
                         <%=  time_convert(moment.duration(post.sumHour, "h").asMinutes() + post.sumMinute) %> </div>
                 </div>
             </div>
-
-
+            
             <div class="log__entry_container">
 
                 <% post.entries.reverse().forEach((entries)=>{ %>
-
-
+    
+                
                 <div class="log__entry">
                     <div class="log__entry__body">
 

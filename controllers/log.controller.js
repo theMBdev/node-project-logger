@@ -25,7 +25,7 @@ exports.log_create_view = function (req, res) {
 exports.log_create = function (req, res, next) {
 
 
-    const { name } = req.body;
+    const { name, color } = req.body;
     let errors = [];
 
     if (!name) {
@@ -45,7 +45,8 @@ exports.log_create = function (req, res, next) {
         let log = new Log(
             {
                 name: req.body.name,
-                user: req.user.id
+                user: req.user.id,
+                color: req.body.color
             }
         );
 

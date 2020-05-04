@@ -18,8 +18,8 @@ exports.entry_test = function(req, res) {
     Log.find({name: "Dev Log"}).populate("entries").exec((err, entries) => {
 
 
-//        console.log("cops " ,entries.entries[0]);
-//        console.log(entries);
+        //        console.log("cops " ,entries.entries[0]);
+        //        console.log(entries);
 
         res.send(entries);
 
@@ -27,31 +27,34 @@ exports.entry_test = function(req, res) {
     })
 }
 
+
 // only logged in user home page
 exports.entry_find = function(req, res) {
-
-    //filter here for the logged in user
-
-
-
 
     Entry.aggregate(
         [
             {
-
+                //filter here for the logged in user
                 $match : { user : req.user._id },
 
-            },{
-                $group: {
+            },
 
-                    _id: { dateFormated: { $dateToString: { format: "%d-%m-%Y", date: "$date" }}, logname: "$logname"}, 
+            {
+                "$lookup": {
+                    "from": "logs",
+                    "localField": "logname",
+                    "foreignField": "name",
+                    "as": "entry_doc"
+                }
+            },
 
-                },
+            {                
 
                 $group: {
                     _id: { 
                         dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
                         logname: '$logname',
+                        color: '$entry_doc.color'
                     },
 
                     sumHour: {
@@ -84,6 +87,7 @@ exports.entry_find = function(req, res) {
                 res.send(err);
             } else {
                 //                                res.json(result);
+                //                console.log("dddd", res.json(result))
                 res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
             }
         }
@@ -156,8 +160,8 @@ exports.display = function (req, res) {
     Log.find({}).populate("entries").exec((err, entries) => {
 
 
-//        console.log("cops " ,entries.entries[1]);
-//        console.log(entries);
+        //        console.log("cops " ,entries.entries[1]);
+        //        console.log(entries);
 
         res.render('new-page', {entries: entries, moment: moment});   
 
@@ -257,7 +261,7 @@ exports.entry_details = function (req, res, next) {
         });
 
     } else {
-//        res.send("Thats a bad id(ea)")
+        //        res.send("Thats a bad id(ea)")
         res.render('500'); 
     }
 
