@@ -54,7 +54,6 @@ exports.entry_find = function(req, res) {
                     _id: { 
                         dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
                         logname: '$logname',
-                        color: '$entry_doc.color'
                     },
 
                     sumHour: {
@@ -87,7 +86,7 @@ exports.entry_find = function(req, res) {
                 res.send(err);
             } else {
                 //                                res.json(result);
-                //                console.log("dddd", res.json(result))
+//                                console.log("dddd", res.json(result))
                 res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
             }
         }
@@ -205,7 +204,6 @@ exports.entry_create = function (req, res, next) {
                 res.render('create-entry', {logs: logs, moment: moment, errors, timeHour, timeMinute, body, logname});   
 
             })
-
 
         }
 

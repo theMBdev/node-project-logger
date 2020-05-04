@@ -25,11 +25,34 @@ exports.log_create_view = function (req, res) {
 exports.log_create = function (req, res, next) {
 
 
-    const { name, color } = req.body;
+    const { name } = req.body;
     let errors = [];
 
-    if (!name) {
-        errors.push({ msg: 'Please enter a log name' });
+
+    function doNameCheck(callback) {
+
+        if(name) {
+            // if name is already being used
+            // search logs of user
+            // maybe need an and here
+            Log.find({user: req.user._id, name: { $exists: true, $in: [ req.body.name ] }}, (err, logs) => {
+
+                if(logs.length > 0) {
+                    console.log("duplicate") 
+                    errors.push({ msg: 'Please enter a log name that is not being used' });
+                    callback();
+                } else {
+                    callback();
+                }
+            })
+
+        } else if (!name) {
+            errors.push({ msg: 'Please enter a log name' }); 
+            callback();
+        } 
+    }
+
+    doNameCheck( function() {
 
         if (errors.length > 0) {                
 
@@ -37,33 +60,42 @@ exports.log_create = function (req, res, next) {
 
                 res.render('create-log', {logs: logs, moment: moment, errors});
             })
+
+        } else {
+
+            let log = new Log(
+                {
+                    name: req.body.name,
+                    user: req.user.id
+                }
+            );
+
+            log.save(function (err, log) {
+                if (err) {
+                    return next(err);
+                }
+
+                // CODE FOR WHEN A LOG IS CREATED ADD TO USERS LOGS 
+                req.user.logs.push(log);
+                req.user.save();
+
+
+                res.redirect('../entry/create');
+            })
         }
+    });
 
-
-    } else {
-
-        let log = new Log(
-            {
-                name: req.body.name,
-                user: req.user.id,
-                color: req.body.color
-            }
-        );
-
-        log.save(function (err, log) {
-            if (err) {
-                return next(err);
-            }
-
-            // CODE FOR WHEN A LOG IS CREATED ADD TO USERS LOGS 
-            req.user.logs.push(log);
-            req.user.save();
-
-
-            res.redirect('../entry/create');
-        })
-    }
 };
+
+//alert('Finished my homework');
+
+
+
+
+
+
+
+
 
 exports.log_create_view = function (req, res) {    
 
