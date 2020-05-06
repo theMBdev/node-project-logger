@@ -13,6 +13,7 @@
 
         <main class="page-container">
 
+
             <div class="top-nav">
                 <div class="left">
                     <form action="/entry/find">
@@ -22,26 +23,27 @@
                 <div class="center"><h3>Product Name</h3></div>
                 <div class="right"></div>
             </div>
+            <div class="page-container__delete">
+                <% logs.forEach((log) => { %>
 
 
-            <% logs.forEach((log) => { %>
 
-            <div class="delete-container">
+                <div class="delete-container">
 
-                <div class="delete-container__text">
-                    <div class="text"><%= log.name %></div>
-                    <div class="">Entries: <%= log.entries.length %></div>
+                    <div class="delete-container__text">
+                        <div class="text"><%= log.name %></div>
+                        <div class="">Entries: <%= log.entries.length %></div>
+                    </div>
+
+
+                    <form class="delete-form"action="/log/<%= log._id %>/delete" method="POST">
+                        <button class="button-delete button-delete--small" type="submit">Delete</button>
+                    </form>
                 </div>
 
 
-                <form class="delete-form"action="/log/<%= log._id %>/delete" method="POST">
-                    <button class="button-delete button-delete--small" type="submit">Delete</button>
-                </form>
+                <% }) %>
             </div>
-
-
-            <% }) %>
-
 
         </main>
 

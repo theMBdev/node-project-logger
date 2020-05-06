@@ -20,6 +20,7 @@
     --grey-8: hsl(0, 0%, 72%);
     --grey-6: hsl(0, 0%, 82%);
     --grey-4: hsl(0, 0%, 92%);
+    --grey-2: hsl(0, 0%, 98%);
 
     --green-4: hsl(91, 61%, 86%);
 
@@ -30,9 +31,7 @@
     --lightest-turq: #F4F6F6;
 
 
-
-
-
+    --text-color: ;
 
     /*    Button and time entry */
     --button-primary: var(--dark-blue);
@@ -627,6 +626,13 @@ textarea {
     justify-content: center;
     align-items: center;
 }
+
+.page-container__settings {
+    background-color: white;
+    border-radius: 5px;
+    height: 100vh;
+    background-color: var(--grey-2);
+}
 .form {
     background-color: white;
     border-radius: 5px;
@@ -815,6 +821,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    background-color: white;
 }
 
 .delete-container__text .text{
@@ -883,3 +890,22 @@ width: 100%;
 }
 
 
+
+.settings__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+.settings__container__text .text {
+    color: var(black-8);
+}
+
+.page-container__delete {
+    background-color: white;
+    border-radius: 5px;
+    height: 100vh;
+    background-color: var(--grey-2);
+}
