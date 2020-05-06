@@ -158,17 +158,13 @@ exports.display = function (req, res) {
     // all logs
     Log.find({}).populate("entries").exec((err, entries) => {
 
-
         //        console.log("cops " ,entries.entries[1]);
         //        console.log(entries);
 
         res.render('new-page', {entries: entries, moment: moment});   
 
     })
-
 }
-
-
 
 
 exports.entry_create_view = function (req, res) {
@@ -178,7 +174,7 @@ exports.entry_create_view = function (req, res) {
     Log.find({user: req.user._id}, (err, logs) => {
 
         if(!logs[0]){
-            res.render('create-log', {logs: logs, moment: moment});   
+            return res.render('create-log', {logs: logs, moment: moment});   
         }
 
         res.render('create-entry', {logs: logs, moment: moment});   
@@ -228,8 +224,11 @@ exports.entry_create = function (req, res, next) {
                 return next(err);
             }  
 
-            Log.findOne({name: req.body.logname}, function(err, log) {
+            
+            Log.findOne({name: req.body.logname, user: req.user.id }, function(err, log) {
 
+//                console.log("User and log BEING INSTERTED", log)
+                
                 log.entries.push(entry);
                 log.save();
             });
