@@ -594,7 +594,7 @@ textarea {
 }
 
 .page-container__create-entry {
-    box-shadow: var(--shadow);
+/*    box-shadow: var(--shadow);*/
     background-color: white;
     border-radius: 5px;
     padding-bottom: 10px;
@@ -605,7 +605,7 @@ textarea {
 }
 
 .page-container__create-log {
-    box-shadow: var(--shadow);
+/*    box-shadow: var(--shadow);*/
     background-color: white;
     border-radius: 5px;
     padding-bottom: 20px;
@@ -908,4 +908,24 @@ width: 100%;
     border-radius: 5px;
     height: 100vh;
     background-color: var(--grey-2);
+}
+
+.page-container__chart {
+    background-color: white;
+    border-radius: 5px;
+    height: 100vh;
+    background-color: var(--grey-2);
+}
+
+.chart__container {
+        display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+.chart-container__time {
+    display: flex;
+    flex-direction: row;
 }

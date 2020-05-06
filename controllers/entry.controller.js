@@ -86,14 +86,11 @@ exports.entry_find = function(req, res) {
                 res.send(err);
             } else {
                 //                                res.json(result);
-//                                console.log("dddd", res.json(result))
+                //                                console.log("dddd", res.json(result))
                 res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
             }
         }
     );
-
-
-
 
 };
 
@@ -224,11 +221,11 @@ exports.entry_create = function (req, res, next) {
                 return next(err);
             }  
 
-            
+
             Log.findOne({name: req.body.logname, user: req.user.id }, function(err, log) {
 
-//                console.log("User and log BEING INSTERTED", log)
-                
+                //                console.log("User and log BEING INSTERTED", log)
+
                 log.entries.push(entry);
                 log.save();
             });
@@ -334,5 +331,22 @@ exports.entry_delete = function (req, res) {
 
     } 
 }
+
+
+
+
+
+exports.entry_chart = function(req, res) {
+
+    Entry.find({user: req.user.id}, function (err, entries) {
+        //find entries    
+//        console.log(entry[0].entries)
+        res.render('chart', {entries: entries, moment: moment});   
+    });
+}
+
+
+
+
 
 

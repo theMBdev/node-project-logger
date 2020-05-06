@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <main class="page-container">
+
+
+            <div class="top-nav">
+                <div class="left">
+                    <form action="/entry/find">
+                        <button class="button" type="submit" >Back</button>
+                    </form>
+                </div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+            </div>
+
+            <div class="page-container__chart">
+                <% var startDate = new Date("2020-05-01"); 
+                var endDate = new Date("2020-05-18");
+                
+
+                          
+                var filteredData = entries.filter(function(a) {
+
+                    console.log("All", a.date)
+                    aDate = new Date(a.date);
+                    //                    console.log("in", aDate);
+
+
+                    return aDate >= startDate && aDate <= endDate;
+                });
+                //            console.log("HERE", filteredData);
+
+
+                console.log("fd", filteredData);
+
+
+                var result = filteredData.reduce(function(res, obj) {
+                    if (!(obj.logname in res)) {
+
+                        console.log("ifdd");
+                        res.__array.push(res[obj.logname] = obj);
+
+                    } else {
+                        res[obj.logname].timeHour += obj.timeHour;
+                        res[obj.logname].timeMinute += obj.timeMinute;
+                    }
+                    return res;
+                }, {__array:[]}).__array
+                //                .sort(function(a,b) { return b.bytes - a.bytes; });
+
+//                console.log("res", result);
+
+
+
+
+                var result = [];
+                filteredData.reduce(function(res, value) {
+                    if (!res[value.logname]) {
+                        res[value.logname] = { logname: value.logname, timeHour: 0, timeMinute: 0 };
+                        result.push(res[value.logname])
+                    }
+                    res[value.logname].timeHour += value.timeHour;
+                    res[value.logname].timeMinute += value.timeMinute;
+                    return res;
+                }, {});
+
+                console.log("new", result)
+                %>
+                
+
+                <%   result.forEach((res) => { %>
+                <div class="chart__container">
+                    <div class="text"><%= res.logname %></div>    
+                    <div class="chart-container__time">
+                        <div class="text"><%= res.timeHour %>:</div>    
+                        <div class="text"><%= res.timeMinute %></div>  
+                    </div>
+                </div>
+                <%  }) %>
+
+            </div>
+
+
+        </main>
+
+
+    </body>
+</html>

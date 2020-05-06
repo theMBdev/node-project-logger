@@ -16,6 +16,8 @@ router.post('/create', ensureAuthenticated, entry_controller.entry_create);
 
 router.get("/find", ensureAuthenticated, entry_controller.entry_find);
 
+router.get("/chart", ensureAuthenticated, entry_controller.entry_chart);
+
 //router.get('/:id', entry_controller.entry_details);
 
 router.post('/:id/update', entry_controller.entry_update);
