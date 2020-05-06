@@ -7,12 +7,10 @@
         <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
 
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
-
     </head>
     <body>
 
         <main class="page-container">
-
 
             <div class="top-nav">
                 <div class="left">
@@ -25,45 +23,57 @@
             </div>
 
             <div class="page-container__chart">
-                <% var startDate = new Date("2020-05-01"); 
-                var endDate = new Date("2020-05-18");
-                
-
-                          
-                var filteredData = entries.filter(function(a) {
-
-                    console.log("All", a.date)
-                    aDate = new Date(a.date);
-                    //                    console.log("in", aDate);
 
 
-                    return aDate >= startDate && aDate <= endDate;
-                });
-                //            console.log("HERE", filteredData);
+                <label for="dropdown">Choose a month:</label>
+                <select onchange="val()" id="dropdown" name="dropdown">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
-                console.log("fd", filteredData);
+                <div class="" id="outputhere"></div>
+            </div>
 
+            <script type='text/javascript'>
+                var jsonData =<%-JSON.stringify(entries)%>;
+                var currentMonth = moment().startOf("month").format('MMMM');
 
-                var result = filteredData.reduce(function(res, obj) {
-                    if (!(obj.logname in res)) {
+                // set dropdown to current month
+                var dropdownChilds = document.getElementById("dropdown").children;
+                console.log(dropdownChilds)
 
-                        console.log("ifdd");
-                        res.__array.push(res[obj.logname] = obj);
-
-                    } else {
-                        res[obj.logname].timeHour += obj.timeHour;
-                        res[obj.logname].timeMinute += obj.timeMinute;
+                for (let item of dropdownChilds) {
+                    if(item.value == currentMonth) {
+                        item.selected = currentMonth;
                     }
-                    return res;
-                }, {__array:[]}).__array
-                //                .sort(function(a,b) { return b.bytes - a.bytes; });
+                }
 
-//                console.log("res", result);
+                var dropdownValue; 
+                var startOfMonth;
+                var endOfMonth;
 
+                startOfMonth = moment().month(currentMonth).startOf("month").toDate();
+                endOfMonth   = moment().month(currentMonth).endOf("month").toDate()
 
+                // fillter by date
+                var filteredData = jsonData.filter(function(a) {
+                    aDate = new Date(a.date);
+                    return aDate >= startOfMonth && aDate <= endOfMonth;
+                });
 
-
+                // join json documents by logname
                 var result = [];
                 filteredData.reduce(function(res, value) {
                     if (!res[value.logname]) {
@@ -75,21 +85,61 @@
                     return res;
                 }, {});
 
-                console.log("new", result)
-                %>
-                
+                document.getElementById('outputhere').innerHTML = "";
 
-                <%   result.forEach((res) => { %>
-                <div class="chart__container">
-                    <div class="text"><%= res.logname %></div>    
-                    <div class="chart-container__time">
-                        <div class="text"><%= res.timeHour %>:</div>    
-                        <div class="text"><%= res.timeMinute %></div>  
-                    </div>
+                result.forEach(element => {        
+
+                    document.getElementById('outputhere').innerHTML +=
+                        `<div class="chart__container">
+<div class="text"> ${element.logname} </div>    
+<div class="chart-container__time">
+<div class="text"> ${element.timeHour}: </div>    
+<div class="text"> ${element.timeMinute} </div>  
                 </div>
-                <%  }) %>
+                </div>`
+                });
 
-            </div>
+
+
+
+                function val() {
+                    dropdownValue = document.getElementById("dropdown").value;
+                    startOfMonth = moment().month(dropdownValue).startOf("month").toDate();
+                    endOfMonth   = moment().month(dropdownValue).endOf("month").toDate()
+
+                    // fillter by date
+                    var filteredData = jsonData.filter(function(a) {
+                        aDate = new Date(a.date);
+                        return aDate >= startOfMonth && aDate <= endOfMonth;
+                    });
+
+                    // join json documents by logname
+                    var result = [];
+                    filteredData.reduce(function(res, value) {
+                        if (!res[value.logname]) {
+                            res[value.logname] = { logname: value.logname, timeHour: 0, timeMinute: 0 };
+                            result.push(res[value.logname])
+                        }
+                        res[value.logname].timeHour += value.timeHour;
+                        res[value.logname].timeMinute += value.timeMinute;
+                        return res;
+                    }, {});
+
+                    document.getElementById('outputhere').innerHTML = "";
+
+                    result.forEach(element => {        
+
+                        document.getElementById('outputhere').innerHTML +=
+                            `<div class="chart__container">
+<div class="text"> ${element.logname} </div>    
+<div class="chart-container__time">
+<div class="text"> ${element.timeHour}: </div>    
+<div class="text"> ${element.timeMinute} </div>  
+                </div>
+                </div>`
+                    });
+                }
+            </script>
 
 
         </main>
