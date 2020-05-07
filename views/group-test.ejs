@@ -64,10 +64,7 @@
             </div>
             <% } else { %>
 
-
-
             <% entries.forEach((post)=>{ %>
-
 
             <!--        TO ADD GRADIENT BAKGROUND FOR EACH DAY -->
             <% if(post._id.dateFormated == lastDate) { %>
@@ -112,15 +109,13 @@
             
             <div class="log__entry_container">
 
-                <% post.entries.reverse().forEach((entries)=>{ %>
-    
+                <% post.entries.reverse().forEach((entries)=>{ %>    
                 
                 <div class="log__entry">
                     <div class="log__entry__body">
 
                         <div class="body--left">
                             <div class="body__time">
-
                                 <%= entries.timeHour %>h 
                                 <%= entries.timeMinute %>m
                             </div>

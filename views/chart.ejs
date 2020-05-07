@@ -24,22 +24,23 @@
 
             <div class="page-container__chart">
 
-
-                <label for="dropdown">Choose a month:</label>
-                <select onchange="val()" id="dropdown" name="dropdown">
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                </select>
+                <div class="dropdown-container">
+                    <label for="dropdown">Choose a month:</label>
+                    <select onchange="val()" id="dropdown" name="dropdown">
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
@@ -52,7 +53,6 @@
 
                 // set dropdown to current month
                 var dropdownChilds = document.getElementById("dropdown").children;
-                console.log(dropdownChilds)
 
                 for (let item of dropdownChilds) {
                     if(item.value == currentMonth) {
@@ -89,12 +89,22 @@
 
                 result.forEach(element => {        
 
+
+                    function time_convert(num)
+                    { 
+                        var hours = Math.floor(num / 60);  
+                        var minutes = num % 60;
+                        return hours + ":" + minutes;         
+                    }   
+
+                    time_convert(moment.duration(element.timeHour, "h").asMinutes() + element.timeMinute)
+
+
                     document.getElementById('outputhere').innerHTML +=
                         `<div class="chart__container">
 <div class="text"> ${element.logname} </div>    
 <div class="chart-container__time">
-<div class="text"> ${element.timeHour}: </div>    
-<div class="text"> ${element.timeMinute} </div>  
+<div class="text"> ${time_convert(moment.duration(element.timeHour, "h").asMinutes() + element.timeMinute)} </div>  
                 </div>
                 </div>`
                 });

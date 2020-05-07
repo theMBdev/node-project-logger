@@ -41,7 +41,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 // 0 for dev mode
-var mode = 1;
+var mode = 0;
 
 if (mode == 0) {
     // DEV
