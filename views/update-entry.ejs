@@ -1,6 +1,3 @@
-
-<%= entry.id %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,20 +11,24 @@
     </head>
     <body>
 
-        <h1>Update</h1>
-
-
-        <form action="../find">
-            <button class="button" type="submit" >Back to Home</button>
-        </form>
-
-
 
         <main class="page-container">
 
+            <div class="top-nav">
+                <div class="left">
+                    <form action="/entry/find">
+                        <button class="button" type="submit" >Back</button>
+                    </form>
+                </div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+
+
+            </div>
+
             <div class="page-container__create-entry">
 
-                <form action="/entry/<%= entry.id %>/updatep" method="POST">
+                <form class="form" action="/entry/<%= entry.id %>/update" method="POST">
 
                     <input name="logname" id="log" type="hidden" value="<%= entry.logname %>">
 
@@ -73,27 +74,25 @@
                             </div>
                         </div>
 
-                        <div class="create-entry__add-note">
 
-                            <textarea placeholder="Enter note..."
-                                      type="text"
-                                      name="body" 
-                                      id="body" 
-                                      rows="4" 
-                                      cols="50" 
-                                      class="create-entry__add-note__textarea"
-                                      ><%= entry.body %></textarea>                            
+                        <textarea placeholder="Enter note..."
+                                  type="text"
+                                  name="body" 
+                                  id="body" 
+                                  rows="6" 
+                                  cols="50" 
+                                  class="create-entry__add-note__textarea"
+                                  ><%= entry.body %></textarea>                            
 
-                        </div>
 
                         <div class="create-entry__submit">                        
-                            <button type="submit">Submit</button>
+                            <button class="button-primary" type="submit">Update</button>
                         </div>                        
                     </div>
                 </form> 
 
-                <form action="/entry/<%= entry.id %>/delete" method="POST">
-                    <button type="submit">Delete</button>
+                <form class="delete-form"action="/entry/<%= entry.id %>/delete" method="POST">
+                    <button class="button-delete" type="submit">Delete</button>
                 </form>
 
             </div>

@@ -8,6 +8,7 @@ const EntrySchema = new Scheme({
     timeMinute: {type: Number, required: false, max: 10000},
     // get from server
     date: {type: Date, default: Date.now, require: false},
+    user: mongoose.ObjectId
 });
 
 module.exports = mongoose.model('Entry', EntrySchema);

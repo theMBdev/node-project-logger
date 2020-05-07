@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <main class="page-container-with-mobile-nav">
+
+            <div class="top-nav">
+                <div class="left"></div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+            </div>
+
+
+            <div class="page-container__settings">
+<!--                <p class="">Welcome <%= user.email %></p>-->
+
+                <a href="/log/delete"> 
+                    <div class="settings__container">
+                        <div class="settings__container__text"><p class="text">Remove Logs</p></div>
+                        <div class="settings__container__icon">></div>
+                    </div>
+                </a>
+
+                <a href="/user/logout"> 
+                    <div class="settings__container">
+                        <div class="settings__container__text"><p class="text logout">Logout</p></div>
+                        <div class="settings__container__icon">></div>
+                    </div>
+                </a>
+            </div>
+
+        </main>
+        <%- include ('./partials/navbar-mobile') %>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

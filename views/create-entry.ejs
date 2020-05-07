@@ -11,43 +11,48 @@
     </head>
     <body>
 
-        <form action="find">
-            <button class="button" type="submit" >Back to Home</button>
-        </form>
-
-
 
         <main class="page-container">
 
+            <%- include ('./partials/messages') %>
+
+
+            <div class="top-nav">
+                <div class="left">
+                    <form action="find">
+                        <button class="button" type="submit" >Back</button>
+                    </form>
+                </div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+
+
+            </div>
+
+
+
+
             <div class="page-container__create-entry">
 
-                <form action="/entry/create" method="POST" id="entrycreateform">
+                <form class="form" action="/entry/create" method="POST" id="entrycreateform">
 
                     <div class="create-entry__log-selection">
 
                         <% logs.forEach((log) => { %>
-
-
-                        <div id="log-container" class="log-selection__log-container">
-
+                        <div id="partContainer" class="log-selection__log-container">
+                            <div class="log-container__icon"></div>
                             <div id="log1" class="log-container__log-text"><%= log.name %></div>
                         </div>
-
-
                         <% }) %>
 
-                        <!--
-<div id="log-container" class="log-selection__log-container">                            
 
-<div id="log2" class="log-container__log-text">Life Log</div>
-</div>
--->
                     </div>
 
                     <a href="../log/create" class="log-create-link">Create New Log</a>
 
 
-                    <input name="logname" id="log" type="hidden">
+                    <input name="logname" id="log" type="hidden" value="<%= typeof logname != 'undefined' ? logname : '' %>">
+
 
 
                     <div class="flex-column-center">
@@ -79,33 +84,32 @@
                                 <div class="timepicker-container__finalTimes">
                                     <div class="finalTimes__input-container">
                                         <div class="input-title">Hours</div>
-                                        <input class="input input-small" id="timeHour" name="timeHour" type="text">                     
+                                        <input class="input input-small" id="timeHour" name="timeHour" type="text" value="<%= typeof timeHour != 'undefined' ? timeHour : '' %>">                     
                                     </div>
 
                                     <div class="finalTimes__input-container">
                                         <div class="input-title">Minutes</div>
-                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text">
+                                        <input class="input input-small" id="timeMinute" name="timeMinute" type="text" value="<%= typeof timeMinute != 'undefined' ? timeMinute : '' %>">
                                     </div>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div class="create-entry__add-note">
 
-                            <textarea placeholder="Enter note..."
-                                      type="text"
-                                      name="body" 
-                                      id="body" 
-                                      rows="4" 
-                                      cols="50" 
-                                      class="create-entry__add-note__textarea"
-                                      ></textarea>                            
+                        <textarea placeholder="Enter note..."
+                                  type="text"
+                                  name="body" 
+                                  id="body" 
+                                  rows="6" 
+                                  cols="50" 
+                                  class="create-entry__add-note__textarea"
 
-                        </div>
+                                  ><%= typeof body != 'undefined' ? body : '' %></textarea>                            
+
 
                         <div class="create-entry__submit">                        
-                            <button type="submit" form="entrycreateform">Submit</button>
+                            <button class="button-primary" type="submit" form="entrycreateform">Save</button>
                         </div>                        
                     </div>
 
@@ -116,49 +120,51 @@
         </main>
 
         <script>
-            // Script for log picker
+            // New script for new style logs
+            var textentry = document.getElementById('log');
 
-            var log1 = document.getElementById('log1');
-            var log2 = document.getElementById('log2');  
-
-            var log = document.getElementById('log');
-
-            var logs = document.querySelectorAll('[id^=log-container]');
-            for(var i in logs){
-                logs.item(i).addEventListener("click", addLog);
+            var boxs = document.querySelectorAll('[id^=partContainer]');
+            for(var i in boxs){
+                boxs.item(i).addEventListener("click", addText);
             }
 
-            function addLog(event) {
-                //remove class from all elements
-                for(var i in logs){
-                    logs.item(i).classList.remove("container__item-selected");
+            // highlight the pre selected times
+            function addClassToLogElements() {
+
+                for(var i in boxs){
+                    if (textentry.value == boxs.item(i).querySelector('.log-container__log-text').innerHTML) {
+                        console.log("IN IN IN")
+
+                        boxs.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+            }
+            addClassToLogElements();
+
+
+            function addText(event) {
+                // removed highlight from all logs
+                for(var i in boxs){
+                    //                    boxs.item(i).querySelector('.log-container__icon').classList.remove("container__item-selected");
+                    boxs.item(i).classList.remove("container__item-selected");
                 }
 
-                // add class to clicked element
-                event.target.classList.add("container__item-selected");
+                // adds highlight and gets log name clicked on log
+                if (event.target.classList[0] == "log-selection__log-container") {
+                    //                    event.target.querySelector('.log-container__icon').classList.add("container__item-selected"); 
+                    event.target.classList.add("container__item-selected"); 
+                    textentry.value = event.target.querySelector('.log-container__log-text').innerHTML;
+                } else {
+                    event.target.parentNode.classList.add("container__item-selected");
+                    textentry.value = event.target.parentNode.querySelector('.log-container__log-text').innerHTML;
+                }
 
-                // add time selected to input box                
-                log.value = event.target.querySelector('.log-container__log-text').innerHTML;
             }
-
         </script>
 
         <script>
 
             // Script for time picker
-
-            //            var hour0 = document.getElementById('hour0');
-            //            var hour1 = document.getElementById('hour1');
-            //            var hour2 = document.getElementById('hour2');
-            //            var hour3 = document.getElementById('hour3');
-            //            var hour4 = document.getElementById('hour4');
-            //            var hour5 = document.getElementById('hour5');
-            //            var hour6 = document.getElementById('hour6');
-            //
-            //            var min0 = document.getElementById("min0");
-            //            var min15 = document.getElementById("min15");
-            //            var min30 = document.getElementById("min30");
-            //            var min45 = document.getElementById("min45");
 
             var timeHour = document.getElementById('timeHour');
             var timeMinute = document.getElementById('timeMinute');
@@ -184,6 +190,7 @@
 
                 // add class to clicked element
                 event.target.classList.add("container__item-selected");
+
                 // add time selected to input box
                 timeHour.value = event.target.innerHTML;
             }
@@ -199,6 +206,23 @@
                 // add time selected to input box
                 timeMinute.value = event.target.innerHTML;
             }
+
+            // highlight the pre selected times
+            function addClassToTimeElements() {
+                //remove class from all elements
+                for(var i in minutesBox){
+                    if (timeMinute.value == minutesBox.item(i).innerHTML) {
+                        minutesBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+
+                for(var i in hoursBox){
+                    if (timeHour.value == hoursBox.item(i).innerHTML) {
+                        hoursBox.item(i).classList.add("container__item-selected"); 
+                    }
+                }
+            }
+            addClassToTimeElements();
 
         </script>    
 

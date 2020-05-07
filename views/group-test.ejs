@@ -11,29 +11,55 @@
     </head>
     <body>
 
-        <% if ( expressFlashCreate.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
-        <% } %>
+        <main class="page-container-with-mobile-nav">
 
-        <% if ( expressFlashUpdated.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
-        <% } %>
+            <% if ( expressFlashCreate.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
+            <% } %>
 
-        <% if ( expressFlashDelete.length > 0 ) { %>
-        <div id="popup"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
-        <% } %>
+            <% if ( expressFlashUpdated.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
+            <% } %>
 
-        <form action="create">
-            <button class="button" type="submit" >Create Entry</button>
-        </form>
-
-        <main class="page-container">
+            <% if ( expressFlashDelete.length > 0 ) { %>
+            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
+            <% } %>
 
             <% var lastDate %>
             <% var passCount = 1%>
 
-            <% entries.forEach((post)=>{ %>
+            <div class="top-nav">
+                <div class="left">
 
+                </div>
+                <div class="center"><h3>Product Name</h3></div>
+                <div class="right"></div>
+
+            </div>
+            
+            <% if(!entries[0]) { %>
+            <div class="page-container__home">
+
+                <div class="page-container__home__empty-state">
+
+
+                    <img class="home-page-intro-image" src="/images/home-page-empty2.svg" alt="">
+
+                    <p class="home-page-intro-text">Hi there
+                        <br>
+                        go ahead and create your first entry</p>
+
+                    <form action="create">
+                        <div class="create-entry__submit">                        
+                            <button class="button-primary" type="submit">Create Entry</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <% } else { %>
+
+            <% entries.forEach((post)=>{ %>
 
             <!--        TO ADD GRADIENT BAKGROUND FOR EACH DAY -->
             <% if(post._id.dateFormated == lastDate) { %>
@@ -50,13 +76,17 @@
             <h3 class="page-container__day-container__date"><%= post._id.dateFormated %></h3>
             <% } %>
 
-            <div class="log__header">
+<!--            you make the db entry here to set the color -->
+            <div id="log-header" class="log__header" style="background:"> 
 
+                
                 <div class="log__header--left">
                     <div class="log__header__title"><%= post._id.logname %></div>
                     <div class="log__header__date"><%= post._id.dateFormated %></div>
                 </div>
 
+
+                
                 <div class="log__header--right">
                     <div class="log__header__time">
 
@@ -71,29 +101,32 @@
                         <%=  time_convert(moment.duration(post.sumHour, "h").asMinutes() + post.sumMinute) %> </div>
                 </div>
             </div>
-
-
+            
             <div class="log__entry_container">
 
-                <% post.entries.reverse().forEach((entries)=>{ %>
-
+                <% post.entries.reverse().forEach((entries)=>{ %>    
+                
                 <div class="log__entry">
                     <div class="log__entry__body">
 
                         <div class="body--left">
                             <div class="body__time">
-
                                 <%= entries.timeHour %>h 
                                 <%= entries.timeMinute %>m
                             </div>
                         </div>
+                        <div class="body--right">   
+                            <a href="../entry/<%= entries._id %>/update" class="qwe">
+                                <p class="body__text"><%= entries.body %></p>
+                            </a>
+                        </div>
+                        <div class="body--edit">
+                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link"><p class="entry-update-link-color">▼</p></a>                           
 
-                        <div class="body--right">
-                            <p class="body__text"><%= entries.body %></p>
-                            <a href="../entry/<%= entries._id %>/update" class="entry-update-link">Edit</a>
                         </div>
                     </div>
                 </div>  
+
 
 
                 <% }) %>
@@ -103,11 +136,13 @@
 
             <% }) %>
 
-
+            <% } %>
 
         </main>
+        <%- include ('./partials/navbar-mobile') %>
 
-<!--        Fades out and removed the entry created/updated/deleted flash message -->
+        <!--        Fades out and removed the entry created/updated/deleted flash message -->
+
         <script>
             var popup = document.getElementById("popup");
 
