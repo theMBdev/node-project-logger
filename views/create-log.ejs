@@ -16,16 +16,7 @@
         <main class="page-container">
 
             <%- include ('./partials/messages') %>
-
-
-            <% if(!logs[0]) { %>
-
-            <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
-
-            <p class="home-page-intro-text">First create a log were your entries will be stored</p>            
-
-            <% } else { %>
-
+            
             <div class="top-nav">
                 <div class="left">
                     <form action="../entry/create">
@@ -36,6 +27,16 @@
                 <div class="right"></div>
 
             </div>
+
+            <% if(!logs[0]) { %>
+
+            <img class="create-log-intro-image" src="/images/create-log-empty.svg" alt="">
+
+            <p class="home-page-intro-text">First create a log were your entries will be stored</p>            
+
+            <% } else { %>
+
+
 
 
             <div class="page-container__create-log">
@@ -50,20 +51,20 @@
                             <input class="input" name="name" id="log" type="text">
                         </div>
 
-<!--
-                        <div class="color-container">
-                            <p> Select color </p>
-                            <div class="color-container__row">
-                                <div id="color-selector" data-color="#FFB2B2" class="color-container__color color-container__color--red"><div class="color-icon">✓</div></div>
-                                <div id="color-selector" data-color="#FFEDB2" class="color-container__color color-container__color--yellow"><div class="color-icon">✓</div></div>
-                                <div id="color-selector" data-color="#BEFFB2" class="color-container__color color-container__color--green"><div class="color-icon">✓</div></div>
-                                <div id="color-selector" data-color="#B2FFFF" class="color-container__color color-container__color--light-blue"><div class="color-icon">✓</div></div>
-                                <div id="color-selector" data-color="#B2C7FF" class="color-container__color color-container__color--blue"><div class="color-icon">✓</div></div>
-                                <div id="color-selector" data-color="#F7B2FF" class="color-container__color color-container__color--pink"><div class="color-icon">✓</div></div>
-                            </div>
-                            <input class="input" name="color" id="color-text" type="hidden">
+                        <!--
+<div class="color-container">
+<p> Select color </p>
+<div class="color-container__row">
+<div id="color-selector" data-color="#FFB2B2" class="color-container__color color-container__color--red"><div class="color-icon">✓</div></div>
+<div id="color-selector" data-color="#FFEDB2" class="color-container__color color-container__color--yellow"><div class="color-icon">✓</div></div>
+<div id="color-selector" data-color="#BEFFB2" class="color-container__color color-container__color--green"><div class="color-icon">✓</div></div>
+<div id="color-selector" data-color="#B2FFFF" class="color-container__color color-container__color--light-blue"><div class="color-icon">✓</div></div>
+<div id="color-selector" data-color="#B2C7FF" class="color-container__color color-container__color--blue"><div class="color-icon">✓</div></div>
+<div id="color-selector" data-color="#F7B2FF" class="color-container__color color-container__color--pink"><div class="color-icon">✓</div></div>
+</div>
+<input class="input" name="color" id="color-text" type="hidden">
 
-                        </div>
+</div>
 -->
 
                         <div class="create-entry__submit">                        
@@ -71,33 +72,33 @@
                         </div>  
 
                         <script>
-//                            
-//                            var colorentry = document.getElementById('color-text');
-//
-//                            var colors = document.querySelectorAll('[id^=color-selector]');
-//
-//                            for(var i in colors){
-//                                colors.item(i).addEventListener("click", addColor);
-//                            }
-//
-//                            function addColor(event) {
-//
-//                                // removed icon from all colors
-//                                for(var i in colors){
-//                                    colors.item(i).firstChild.classList.remove("color-selected");
-//                                }
-//
-//                                // adds icon and gets attribute of clicked on                                
-//
-//                                if(event.target.firstChild.classList) {
-//                                    event.target.firstChild.classList.add("color-selected"); 
-//                                    colorentry.value = event.target.getAttribute("data-color");
-//                                } else {
-//                                    event.target.classList.add("color-selected")
-//                                    colorentry.value = event.target.parentNode.getAttribute("data-color");
-//                                }               
-//
-//                            }
+                            //                            
+                            //                            var colorentry = document.getElementById('color-text');
+                            //
+                            //                            var colors = document.querySelectorAll('[id^=color-selector]');
+                            //
+                            //                            for(var i in colors){
+                            //                                colors.item(i).addEventListener("click", addColor);
+                            //                            }
+                            //
+                            //                            function addColor(event) {
+                            //
+                            //                                // removed icon from all colors
+                            //                                for(var i in colors){
+                            //                                    colors.item(i).firstChild.classList.remove("color-selected");
+                            //                                }
+                            //
+                            //                                // adds icon and gets attribute of clicked on                                
+                            //
+                            //                                if(event.target.firstChild.classList) {
+                            //                                    event.target.firstChild.classList.add("color-selected"); 
+                            //                                    colorentry.value = event.target.getAttribute("data-color");
+                            //                                } else {
+                            //                                    event.target.classList.add("color-selected")
+                            //                                    colorentry.value = event.target.parentNode.getAttribute("data-color");
+                            //                                }               
+                            //
+                            //                            }
                         </script>
 
                     </div>

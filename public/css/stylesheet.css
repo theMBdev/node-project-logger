@@ -617,20 +617,33 @@ textarea {
 }
 
 .page-container__home {
-    box-shadow: var(--shadow);
+/*    box-shadow: var(--shadow);*/
     background-color: white;
     border-radius: 5px;
-    height: 100vh;
+    height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.page-container__chart-empty {
+/*    box-shadow: var(--shadow);*/
+/*    background-color: white;*/
+    border-radius: 5px;
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 .page-container__settings {
     background-color: white;
     border-radius: 5px;
-    height: 100vh;
+    height: calc(100vh - 120px);
     background-color: var(--grey-2);
 }
 .form {
@@ -681,6 +694,7 @@ textarea {
     margin: auto;
     display: block;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 
@@ -822,6 +836,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    margin-bottom: 5px;
     background-color: white;
 }
 
@@ -912,9 +927,9 @@ width: 100%;
 }
 
 .page-container__chart {
-    background-color: white;
+/*    background-color: white;*/
     border-radius: 5px;
-    height: 100vh;
+    height: calc(100vh - 120px);
     background-color: var(--grey-2);
 
 }
@@ -942,4 +957,8 @@ width: 100%;
 
 .dropdown-container label {
     padding-bottom: 2px;
+}
+
+.settings__container__text .logout {
+    color: #cc0000;
 }

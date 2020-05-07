@@ -24,6 +24,32 @@
                 <div class="right"></div>
             </div>
             <div class="page-container__delete">
+                
+                
+                <% if(!logs[0]) { %>
+            <div class="page-container__home">
+
+                <div class="page-container__home__empty-state">
+
+
+                    <img class="home-page-intro-image" src="/images/empty.svg" alt="">
+
+                    <p class="home-page-intro-text">You dont have any logs</p>
+
+                    <form action="create">
+                        <div class="create-entry__submit">                        
+                            <button class="button-primary" type="submit">Create Entry</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <% } else { %>
+                
+                
+                
+                
+                
                 <% logs.forEach((log) => { %>
 
 
@@ -44,6 +70,8 @@
 
                 <% }) %>
             </div>
+            
+            <% } %>
 
         </main>
 
