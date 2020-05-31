@@ -95,61 +95,6 @@ exports.entry_find = function(req, res) {
 };
 
 
-// all entries on home page - old way
-//exports.entry_find = function(req, res) {
-//    
-//    Entry.aggregate(
-//        [
-//            {
-//                $group: {
-//
-//                    _id: { dateFormated: { $dateToString: { format: "%d-%m-%Y", date: "$date" }}, logname: "$logname"}, 
-//
-//                },
-//
-//                $group: {
-//                    _id: { 
-//                        dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
-//                        logname: '$logname',
-//                    },
-//
-//                    sumHour: {
-//                        $sum: '$timeHour'
-//                    },                     
-//                    sumMinute: {
-//                        $sum: '$timeMinute'
-//                    },
-//
-//                    entries: {
-//                        $push: {
-//                            body: '$body',
-//                            logname: '$logname',
-//                            _id: '$_id',
-//                            timeHour: '$timeHour',
-//                            timeMinute: '$timeMinute',
-//                            date: '$date',
-//                            dateFormated: {$dateToString: { format: "%d-%m-%Y", date: "$date"}},
-//                        }
-//                    }
-//                }
-//            },
-//
-//            { $sort: { 'entries.date' : -1 } },
-//
-//        ],
-//
-//        function(err, result) {
-//            if (err) {
-//                res.send(err);
-//            } else {
-//                //                                res.json(result);
-//                res.render('group-test', {entries: result, moment: moment, expressFlashCreate: req.flash('create'), expressFlashUpdated: req.flash('update'), expressFlashDelete: req.flash('delete')});   
-//            }
-//        }
-//    );
-//};
-
-
 exports.display = function (req, res) {
 
     // all logs
@@ -332,10 +277,6 @@ exports.entry_delete = function (req, res) {
     } 
 }
 
-
-
-
-
 exports.entry_chart = function(req, res) {
 
     Entry.find({user: req.user.id}, function (err, entries) {
@@ -344,9 +285,3 @@ exports.entry_chart = function(req, res) {
         res.render('chart', {entries: entries, moment: moment});   
     });
 }
-
-
-
-
-
-
