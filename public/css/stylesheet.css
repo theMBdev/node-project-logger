@@ -962,3 +962,15 @@ width: 100%;
 .settings__container__text .logout {
     color: #cc0000;
 }
+
+.chart-container {
+	height: 400px;
+}
+
+.chart-container canvas {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+	
