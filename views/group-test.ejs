@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>title</title>
+        <title>Home</title>
         <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
 
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&&family=Noto+Sans&display=swap" rel="stylesheet">
@@ -14,15 +14,15 @@
         <main class="page-container-with-mobile-nav">
 
             <% if ( expressFlashCreate.length > 0 ) { %>
-            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashCreate %></div>
+            <div id="popup" class="form-flash"> <%= expressFlashCreate %></div>
             <% } %>
 
             <% if ( expressFlashUpdated.length > 0 ) { %>
-            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashUpdated %></div>
+            <div id="popup" class="form-flash"> <%= expressFlashUpdated %></div>
             <% } %>
 
             <% if ( expressFlashDelete.length > 0 ) { %>
-            <div id="popup" class="form-flash"><strong>FLASH!</strong> <%= expressFlashDelete %></div>
+            <div id="popup" class="form-flash"> <%= expressFlashDelete %></div>
             <% } %>
 
             <% var lastDate %>
