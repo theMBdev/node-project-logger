@@ -79,97 +79,6 @@
 				const CANVAS = document.getElementById("chart").getContext('2d');
 
 
-				startOfMonth = moment().month(currentMonth).startOf("month").toDate();
-				endOfMonth = moment().month(currentMonth).endOf("month").toDate()
-
-				// fillter by date
-				var filteredData = jsonData.filter(function(a) {
-					aDate = new Date(a.date);
-					return aDate >= startOfMonth && aDate <= endOfMonth;
-				});
-
-				if (filteredData.length != 0) {
-
-					var dataForChart = [];
-					var labelsForChart = [];
-					// join json documents by logname
-					var result = [];
-					filteredData.reduce(function(res, value) {
-						if (!res[value.logname]) {
-							res[value.logname] = {
-								logname: value.logname,
-								timeHour: 0,
-								timeMinute: 0
-							};
-							result.push(res[value.logname])
-						}
-						res[value.logname].timeHour += value.timeHour;
-						res[value.logname].timeMinute += value.timeMinute;
-						return res;
-					}, {});
-
-					document.getElementById('outputhere').innerHTML = "";
-
-					result.forEach(element => {
-
-						function time_convert(num) {
-							var hours = Math.floor(num / 60);
-							var minutes = num % 60;
-							return hours + "." + minutes;
-						}
-
-						var time = time_convert(moment.duration(element.timeHour, "h").asMinutes() + element.timeMinute)
-
-						document.getElementById('outputhere').innerHTML +=
-							`<div class="chart__container">
-<div class="text"> ${element.logname} </div>    
-<div class="chart-container__time">
-<div class="text"> ${time} </div>  
-				</div>
-				</div>`
-
-
-						dataForChart.push(parseFloat(time));
-						labelsForChart.push(element.logname);
-					});
-
-
-
-					data = {
-						datasets: [{
-							data: dataForChart,
-							backgroundColor: [
-								"#5bc8c8",
-								"#81d5d5",
-								"#a7e2e2",
-								"#cdeeee",
-								"#e0f4f4"
-							]
-						}],
-
-						labels: labelsForChart
-					};
-
-					// For a pie chart
-					myPieChart = new Chart(CANVAS, {
-						type: 'pie',
-						data: data
-					});
-
-				} else {
-
-					// empty
-					document.getElementById('outputhere').innerHTML =
-
-						`<div class="page-container__chart-empty">
-<div class="page-container__home__empty-state">
-<img class="home-page-intro-image" src="/images/empty.svg" alt="">
-<p class="home-page-intro-text">There are no entries for this month</p>                    
-				</div>
-				</div>`
-
-				}
-
 				// when user changes the month, load in new data for that month
 				function createNewChart() {
 					dropdownValue = document.getElementById("dropdown").value;
@@ -242,7 +151,10 @@
 						};
 
 						// destroy previous chart
-						myPieChart.destroy();
+						if (myPieChart) {
+							myPieChart.destroy();			
+						}
+
 
 						myPieChart = new Chart(CANVAS, {
 							type: 'pie',
@@ -265,18 +177,11 @@
 					}
 				}
 
+				createNewChart();
 			</script>
-
 
 		</main>
 		<%- include ('./partials/navbar-mobile') %>
-
-		<script>
-
-
-
-		</script>
-
 
 	</body>
 
